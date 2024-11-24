@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ShopGiay.Models.SANPHAM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<section class="shop container">
+
+    <h2 class="section-title"> Sản phẩm </h2>
+    <div class="shop-content style1">
+        @foreach (var item in Model)
+        {
+            <div class="product-box">
+                <img src="~/Images/@item.AnhBia" class="product-img">
+                <h2 class="product-title">@item.TenGiay</h2>
+                <span class="price">@item.GiaBan đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+        }
+
+       
+    </div>
+    <h2 class="section-title">Sản phẩm bán chạy</h2>
+    @Html.Action("SanPhamBanChay", "User")
+    <div id="thuonghieugiay">
+        <h2 class="section-title">Thương hiệu giày</h2>
+        <div class="list-banner row style1">
+            <div class="list-owl">
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 122403.png" width="342" height="150"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">GIÀY ĐÁ BANH NIKE</a></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 122419.png" width="342" height="150"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">GIÀY ĐÁ BANH ADIDAS</a></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 122431.png" width="342" height="150"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">GIÀY ĐÁ BANH PUMA</a></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 122440.png" width="342" height="150"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">GIÀY ĐÁ BANH MIZUNO</a></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 122511.png" width="342" height="150"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">GIÀY ĐÁ BANH KAMITO</a></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 122530.png" width="342" height="150"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">GIÀY ĐÁ BANH JOMA</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2 class="section-title">Chọn giày theo vị trí</h2>
+        <div class="list-banner row style1">
+            <div class="list-owl">
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 113855.png" width="250" height="250"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">Hậu vệ</a></div>
+                        <span class="sub-title">Phòng ngự,chắc chắn</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 113922.png" width="250" height="250"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">Tiền vệ trung tâm</a></div>
+                        <span class="sub-title">Kiểm soát,chuyền bóng</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 113937.png" width="250" height="250"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">Tiền vệ cánh</a></div>
+                        <span class="sub-title">Tốc độ,đột phá</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="style2">
+                        <a href="KhuongHongThanh_Giaybongda.html"><img src="~/Images/Screenshot 2023-04-03 114005.png" width="250" height="250"></a>
+                        <div class="item-title"><a href="KhuongHongThanh_Giaybongda.html">Tiền đạo</a></div>
+                        <span class="sub-title">Dứt điểm,chính xác</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section slider {
+    @Html.Action("Slider", "User")    
+}

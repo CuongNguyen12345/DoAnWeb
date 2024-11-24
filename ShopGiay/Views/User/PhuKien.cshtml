@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "PhuKien";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<style>
+    article {
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 50px;
+    }
+
+    aside {
+        width: 200px;
+    }
+
+        aside > ul {
+            list-style: none;
+        }
+
+            aside > ul > li {
+                padding-left: 20px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px dashed #969696;
+            }
+
+                aside > ul > li > a {
+                    color: #333;
+                    text-decoration: none;
+                }
+
+    section {
+        width: 800px;
+        padding: 0;
+    }
+</style>
+
+
+<article>
+    <aside>
+        <h3>
+            <i class="fa fa-list"></i>
+            DANH MỤC
+        </h3>
+        <ul>
+            <li><a href="#">Bóng đá</a></li>
+            <li><a href="#">Găng tay thủ môn</a></li>
+            <li><a href="#">Bảo vệ ống đồng</a></li>
+            <li><a href="#">Tất/vớ</a></li>
+            <li><a href="#">Balo/túi đựng giày</a></li>
+            <li><a href="#">Băng cuốn cổ chân</a></li>
+            <li><a href="#">Kim bơm bóng</a></li>
+            <li><a href="#">Dây giày</a></li>
+            <li><a href="#">Chai xịt khử mùi hôi giày</a></li>
+            <li><a href="#">Chai xịt lạnh giảm đau</a></li>
+        </ul>
+    </aside>
+    <section>
+        <!-- <img src="Images/Screenshot 2023-04-04 103744.png"> -->
+        <h2 class="section-title">Tất cả sản phẩm</h2>
+        <div class="shop-content style1">
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 102428.png" class="product-img">
+                <h2 class="product-title">BALO XẾP GỌN </h2>
+                <span class="price">100000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 102523.png" class="product-img">
+                <h2 class="product-title">DÂY GIÀY BÓNG ĐÁ CHUYÊN DỤNG PHẢN QUANG NMS REFLECTIVE LACES 4MM-115CM CÓ HỘP ĐI KÈM</h2>
+                <span class="price">50000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 102614.png" class="product-img">
+                <h2 class="product-title">CHAI XỊT LẠNH GIẢM ĐAU LIGPRO 200ML</h2>
+                <span class="price">130000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 102635.png" class="product-img">
+                <h2 class="product-title">CHAI XỊT LÀM NÓNG CƠ LIGPRO 200ML</h2>
+                <span class="price">130000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 102721.png" class="product-img">
+                <h2 class="product-title">KIM BƠM BÓNG ĐÁ INOX 38MM</h2>
+                <span class="price">5000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 102811.png" class="product-img">
+                <h2 class="product-title">BĂNG KEO VẢI THỂ THAO </h2>
+                <span class="price">20000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 102923.png" class="product-img">
+                <h2 class="product-title">BÓNG ĐÁ NIKE FOOTBALL FLIGHT SERIE A HI-VIS - YELLOW/TOTAL ORANGE/RACER BLUE</h2>
+                <span class="price">500000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 103004.png" class="product-img">
+                <h2 class="product-title">ADIDAS FOOTBALL CHAMPIONS LEAGUE FINALE 2022 MATCH BALL - WHITE/YELLOW/BLUE</h2>
+                <span class="price">500000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 103037.png" class="product-img">
+                <h2 class="product-title">BÓNG ĐÁ MOLTEN F5U5000-12 OFFICIAL BALL EUROPA LEAGUE 2021-2022</h2>
+                <span class="price">450000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 103106.png" class="product-img">
+                <h2 class="product-title">BÓNG ĐÁ ADIDAS FOOTBALL CHAMPIONS LEAGUE 2023 PRO MATCH BALL - WHITE/ROYAL BLUE/ORANGE</h2>
+                <span class="price">600000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 103159.png" class="product-img">
+                <h2 class="product-title">TÚI ĐEO CHÉO ĐỰNG GIÀY </h2>
+                <span class="price">99000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 103242.png" class="product-img">
+                <h2 class="product-title">TÚI GYMSACK NIKE VISION "NEW LIGHTS"</h2>
+                <span class="price">120000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 103324.png" class="product-img">
+                <h2 class="product-title">BỌC ỐNG ĐỒNG ADIDAS EVERLESTO SHIN GUARDS WHITE/BLACK</h2>
+                <span class="price">200000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 103402.png" class="product-img">
+                <h2 class="product-title">BỌC ỐNG ĐỒNG NIKE J SHINGUARD BLACK - WHITE</h2>
+                <span class="price">199000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+            <div class="product-box">
+                <img src="~/Images/Screenshot 2023-04-04 103456.png" class="product-img">
+                <h2 class="product-title">VỚ CHỐNG TRƠN H3 SUPERB</h2>
+                <span class="price">50000 đ</span>
+                <i class="fas fa-cart-shopping add-cart"></i>
+            </div>
+        </div>
+    </section>
+</article>
+

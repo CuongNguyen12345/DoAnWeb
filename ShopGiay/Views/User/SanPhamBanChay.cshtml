@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ShopGiay.Models.SANPHAM>
+
+<div class="shop-content style1">
+    @foreach (var item in Model)
+    {
+        <div class="product-box">
+            <img src="~/Images/@item.AnhBia" class="product-img">
+            <h2 class="product-title">@item.TenGiay</h2>
+            <span class="price">@item.GiaBan đ</span>
+            <i class="fas fa-cart-shopping add-cart"></i>
+        </div>
+    }
+
+    
+</div>

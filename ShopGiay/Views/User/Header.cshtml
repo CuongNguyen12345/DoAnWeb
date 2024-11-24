@@ -1,0 +1,70 @@
+﻿
+
+
+<header class="header">
+    <div class="logo-container">
+        <a href=""><img src="~/Images/onfire.png" alt="Logo"></a>
+    </div>
+    <nav>
+        <div id="menu">
+            <ul class="menulon">
+                <li><a href="KhuongHongThanh_TrangChu.html">Trang chủ</a></li>
+                <li>
+                    <a href="@Url.Action("Product", "User")">Giày bóng đá<i class="fa fa-chevron-down"></i></a>
+                    @*<ul class="menunho1">
+                        <li><a href="KhuongHongThanh_Giaybongda.html">Giày sân cỏ nhân tạo</a></li>
+                        <li><a href="KhuongHongThanh_Giaybongda.html">Giày sân cỏ tự nhiên</a></li>
+                        <li><a href="KhuongHongThanh_Giaybongda.html">Giày sân futsal</a></li>
+                    </ul>*@
+                </li>
+                <li>
+                    <a href="#thuonghieugiay">Thương hiệu giày<i class="fa fa-chevron-down"></i></a>
+                    <ul class="menunho1">
+                        <li><a href="KhuongHongThanh_Giaybongda.html">NIKE</a></li>
+                        <li><a href="KhuongHongThanh_Giaybongda.html">PUMA</a></li>
+                        <li><a href="KhuongHongThanh_Giaybongda.html">ADIDAS</a></li>
+                        <li><a href="KhuongHongThanh_Giaybongda.html">MIZUNO</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="@Url.Action("PhuKien", "User")">Phụ kiện<i class="fa fa-chevron-down"></i></a>
+                    <ul class="menunho1">
+                        <li><a href="KhuongHongThanh_Phukien.html">Bóng đá</a></li>
+                        <li><a href="KhuongHongThanh_Phukien.html">Găng tay thủ môn</a></li>
+                        <li><a href="KhuongHongThanh_Phukien.html">Bảo vệ ống đồng</a></li>
+                        <li><a href="KhuongHongThanh_Phukien.html">Tất vớ</a></li>
+                        <li><a href="KhuongHongThanh_Phukien.html">Balo / Túi đựng giày</a></li>
+                    </ul>
+                </li>
+                <li><a href="@Url.Action("ChonSize", "User")">Chọn size</a></li>
+                <li><a href="@Url.Action("ChinhSachHoanTra", "User")">Chính sách</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="search-container">
+        <form action="search">
+            <input type="text" placeholder="Tìm kiếm...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+    <div class="user-actions">
+        <a href="@Url.Action("Login", "User")"><i class="fa-solid fa-user"></i></a>
+    </div>
+
+    <div>
+        <i class="fas fa-shopping-cart" id="cart-icon"></i>
+        <div class="cart">
+            <h2 class="cart-title">giỏ hàng của bạn</h2>
+            <div class="cart-content">
+            </div>
+            <div class="total">
+                <div class="total-title">tổng tiền</div>
+                <div class="total-price">0 đ</div>
+            </div>
+            <button type="button" class="btn-buy">đặt hàng ngay</button>
+            <i class="fas fa-x" id="close-cart"></i>
+        </div>
+    </div>
+</header>

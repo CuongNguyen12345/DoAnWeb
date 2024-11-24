@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "DoanhThuSanPham";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            
+            <h4 class="page-title">Doanh thu mỗi tháng</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-4">
+        <div class="card" style="width: 900px;">
+            <div class="card-body">
+                @*<h4 class="header-title">Doanh thu mỗi tháng</h4>*@
+
+                <div>
+                    <canvas id="myChart">
+
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<script src="~/Scripts/js/Chart.bundle.min.js"></script>
+<script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar', // Loại biểu đồ: bar, line, pie, doughnut, radar, scatter, bubble, ...
+            data: {
+                labels: ['Tháng 1',
+                         'Tháng 2',
+                         'Tháng 3',
+                         'Tháng 4',
+                         'Tháng 5',
+                         'Tháng 6',
+                         'Tháng 7',
+                         'Tháng 8',
+                         'Tháng 9',
+                         'Tháng 10',
+                         'Tháng 11',
+                         'Tháng 12'
+                        ],
+                datasets: [{
+                    label: 'Doanh thu (tỷ VND)',
+                    data: [12, 19, 3, 5, 2, 7, 8, 9, 11, 12, 13, 21],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+</script>

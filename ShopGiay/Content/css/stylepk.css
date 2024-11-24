@@ -1,0 +1,299 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+	list-style: none;
+	text-decoration: none;
+}
+
+/* Global Styles */
+body {
+	font-family: Arial, sans-serif;
+	color: #333;
+	margin: 0;
+	padding: 0;
+}
+.logo{
+	flex: 1;
+}
+.container{
+	max-width: 1068px;
+	margin: auto;
+	width: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* Header */
+header {
+	background-image: linear-gradient(0 , white ,gray );
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 4px 6px rgba(25, 23, 23, 0.1);
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+nav ul {
+	list-style: none;
+	display: flex;
+}
+
+nav li {
+	margin: 0 10px;
+}
+
+nav a {
+	color: #333;
+	text-decoration: none;
+
+}
+nav a:hover {
+	color: #f00;
+	transition: 2s;
+}
+.menunho1 {
+	display: none; /* Ẩn menu con */
+	position: absolute;
+	background-color: gray;
+	min-width: 200px;
+	box-shadow: 0 4px 6px rgba(25, 23, 23, 0.1);
+	z-index: 1;
+  }
+  .menunho1 {
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+  }
+  .menunho1 {
+	padding: 10px;
+  }
+  .menunho1 li {
+	border-bottom: 1px solid #eee;
+  }
+  
+  .menunho1 li:last-child {
+	border-bottom: none;
+  }
+  
+  .menunho1 a {
+	display: block;
+	padding: 10px 20px;
+	color: #333;
+  }
+  
+  .menunho1 li:hover > a {
+	background-color: #f00;
+	color: #fff;
+  }
+  .menunho1 li:hover > a {
+	font-weight: bold;
+	font-size: 16px;
+  }
+  
+  .menulon li:hover .menunho1 {
+	display: block; /* Hiện menu con khi hover vào */
+  }
+
+.search-container {
+	flex: 1;
+	text-align: right;
+}
+
+input[type="text"] {
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+}
+
+button[type="submit"] {
+	background-color: #f00;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+	background-color: #ff4d4d;
+}
+
+.user-actions {
+  display: flex;
+}
+
+.user-actions a {
+  color: #333;
+  text-decoration: none;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+.user-actions a:hover {
+  background-color: #333;
+  color: #fff;
+}
+#cart-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+aside{
+	float: left;
+	width: 200px;
+}
+aside>ul{
+	list-style: none;
+}
+aside>ul>li{
+	padding-left: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px dashed #969696;
+}
+aside>ul>li>a{
+	color: #333;
+	text-decoration: none;
+}
+section{
+	float: right;
+	width: 1250px;
+	padding: 0;
+}
+.shop-content{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+	gap: 1.5rem;
+  }
+  .section-title{
+	  font-size: 50px;
+	  font-weight: bold;
+	  font-size: 28px;
+	  margin: 5px 0 25px;
+	  line-height: 1.1;
+  }
+  .section-title:hover{
+	  color:violet;
+	  transition: 2s;
+	  
+  }
+  .product-box{
+	  position: relative;
+	  float: left;
+  }
+  .product-box:hover{
+	  padding: 10px;
+	  border:1px solid black;
+	  transition: 0.4s;
+  }
+  .product-img{
+	  width: 100%;
+	  height: auto;
+	  margin-bottom: 0.5rem;
+  }
+  .product-title{
+	  font-size: 1.1rem;
+	  font-weight: 600;
+	  text-transform: uppercase;
+	  margin-bottom: 0.5rem;
+  }
+  .price{
+	  font-weight: 500;
+  }
+  .add-cart{
+	position: absolute;
+    bottom:0;
+    right: 0;
+    background: black;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+.add-cart:hover{
+	background: hsl(249,32%,17%);
+}
+  .style1{
+	margin-bottom: 100px;
+}
+article{
+	clear: both;
+}
+footer {
+	clear: both;
+	background-color:gray;
+	color: #fff;
+	padding: 20px 0;
+	
+  }  
+  .container1 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 1200px;
+	margin: 0 auto;
+  }
+  
+  .container1>p {
+	margin: 0;
+  }
+  
+  .container1>ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+  }
+  
+  .container1>li {
+	display: inline-block;
+	margin-right: 20px;
+  }
+  
+  .container1>a {
+	color: #fff;
+	text-decoration: none;
+  }
+  .icons{
+	display: flex;
+	column-gap: 25px;
+  }
+  .icon{
+	display: inline-flex;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	outline: 2px solid #fff;
+	transition-property: outline-offset , outline-color , background-color;
+	transition-duration: 0.25s;
+  }
+  .icon:hover{
+	outline-offset: 4px;
+  }
+  .icon i{
+	margin: auto;
+	font-size: 20px;
+  }
+  .icon:hover i{
+	animation: shake 0.25s;
+  }
+  @keyframes shake {
+	10%{
+		transform: rotate(15deg);
+	}
+	20%{
+		transform: rotate(-15deg);
+	}
+	30%{
+		transform: rotate(15deg);
+	}
+	40%{
+		transform: rotate(-15deg);
+	}
+  }

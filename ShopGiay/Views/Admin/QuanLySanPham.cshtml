@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "QuanLySanPham";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+
+            <h4 class="page-title">General Elements</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Tìm kiếm sản phẩm</h4>
+                <br>
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label" for="simpleinput">Tên sản phẩm</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" id="simpleinput">
+                        </div>
+                        <label class="col-lg-2 col-form-label" for="simpleinput">Loại sản phẩm</label>
+                        <div class="col-lg-4">
+                            <select name="" id="" class="form-control">
+                                <option value="">--Chọn loại sản phẩm--</option>
+                                @*<option value="">Chăm sóc da</option>
+                                <option value="">Sữa rửa mặt</option>
+                                <option value="">Chăm sóc tóc</option>*@
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả từ</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="simpleinput">
+                        </div>
+                        <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả đến</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" id="simpleinput">
+                        </div>
+                    </div>
+                </form>
+                <div class="button-list">
+                    <a href="../Admin/ThemSanPham.html" class="btn btn-warning float-right" title="Thêm sản phẩm">
+                        <i class="fe-plus"></i>
+                    </a>
+
+                    <button type="button" class="btn btn-success float-right" title="Tìm kiếm sản phẩm">
+                        <i class="fe-search"></i>
+                    </button>
+
+                </div>
+
+
+            </div> <!-- end card-box -->
+        </div> <!-- end card-->
+    </div><!-- end col -->
+</div>
+
+<table class="table mb-0">
+    <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Tên sản phẩm</th>
+            <th>Hạn sử dụng</th>
+            <th>Giá cả</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Sữa rửa mặt dạng gel</td>
+            <td>20/12/2027</td>
+            <td>600.000 VND</td>
+            <td>
+                <a href="../Admin/SuaSanPham.html" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
+                    <i class="fe-edit-1"></i>
+                </a>
+                <button type="button" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
+                    <i class="fe-trash-2"></i>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Toner cấp ẩm</td>
+            <td>13/12/2027</td>
+            <td>800.000 VND</td>
+            <td>
+                <a href="../Admin/SuaSanPham.html" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
+                    <i class="fe-edit-1"></i>
+                </a>
+                <button type="button" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
+                    <i class="fe-trash-2"></i>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Kem dưỡng ẩm dạng gel</td>
+            <td>20/06/2027</td>
+            <td>900.000 VND</td>
+            <td>
+                <a href="../Admin/SuaSanPham.html" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
+                    <i class="fe-edit-1"></i>
+                </a>
+                <button type="button" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
+                    <i class="fe-trash-2"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
