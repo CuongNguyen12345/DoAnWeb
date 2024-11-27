@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Xác Nhận Đơn Hàng";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container py-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-body text-center p-5">
+            <div class="success-animation">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="mt-4">ĐẶT HÀNG THÀNH CÔNG!</h2>
+            <p class="text-muted mb-4">
+                Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ xử lý đơn hàng của bạn trong thời gian sớm nhất.
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="@Url.Action("Index", "ShopGiay")" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Về Trang Chủ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .success-animation {
+        text-align: center;
+        animation: scale-up 0.5s ease-out;
+    }
+
+    .success-animation i {
+        font-size: 80px;
+        color: #28a745;
+    }
+
+    @*@keyframes scale-up {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }*@
+
+    .card {
+        border-radius: 15px;
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+        border-radius: 30px;
+        padding: 10px 30px;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+</style>

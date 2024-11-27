@@ -1,0 +1,260 @@
+﻿
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">
+            <h2>ĐĂNG NHẬP</h2>
+            <div class="login-header-line"></div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(ViewBag.ThongBao))
+        {
+            <div class="alert-custom">
+                <i class="fas fa-exclamation-circle"></i>
+                @ViewBag.ThongBao
+                <button type="button" class="alert-close" onclick="this.parentElement.style.display='none'">&times;</button>
+            </div>
+        }
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "login-form" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="input-group">
+                    <i class="fas fa-user input-icon"></i>
+                    @if (Request.Cookies["TenDN"] != null)
+                    {
+                        @Html.TextBox("TenDN", Request.Cookies["TenDN"].Value, new { @class = "form-input", placeholder = "Tên đăng nhập" })
+                    }
+                    else
+                    {
+                        @Html.TextBox("TenDN", null, new { @class = "form-input", placeholder = "Tên đăng nhập" })
+                    }
+                </div>
+                @if (ViewData["Err1"] != null)
+                {
+                    <div class="error-message">@ViewData["Err1"]</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    @if (Request.Cookies["MatKhau"] != null)
+                    {
+                        @Html.Password("MatKhau", Request.Cookies["MatKhau"].Value, new { @class = "form-input", placeholder = "Mật khẩu" })
+                    }
+                    else
+                    {
+                        @Html.Password("MatKhau", null, new { @class = "form-input", placeholder = "Mật khẩu" })
+                    }
+                </div>
+                @if (ViewData["Err2"] != null)
+                {
+                    <div class="error-message">@ViewData["Err2"]</div>
+                }
+            </div>
+
+            <div class="remember-me">
+                @Html.CheckBox("remember", new { @class = "remember-checkbox" })
+                <label class="remember-label">Nhớ thông tin đăng nhập</label>
+            </div>
+
+            <button type="submit" class="login-button">
+                <span>ĐĂNG NHẬP</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        }
+
+        <div class="action-links">
+            <div class="register-link">
+                <p>Chưa có tài khoản? @Html.ActionLink("Đăng ký ngay!", "DangKy", "User")</p>
+            </div>
+            <div class="change-password-link">
+                <p>@Html.ActionLink("Quên mật khẩu?", "DoiMatKhau", "User", null, new { @class = "forgot-password" })</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 20px;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 400px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+        .login-header h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+    .login-header-line {
+        height: 3px;
+        width: 50px;
+        background: #007bff;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .input-group {
+        position: relative;
+        border-bottom: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+    }
+
+        .input-group:focus-within {
+            border-color: #007bff;
+        }
+
+    .input-icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        font-size: 18px;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 12px 10px 12px 35px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        color: #333;
+        background: transparent;
+    }
+
+        .form-input::placeholder {
+            color: #999;
+        }
+
+    .error-message {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .remember-checkbox {
+        margin-right: 10px;
+    }
+
+    .remember-label {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .login-button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(45deg, #007bff, #00c6ff);
+        border: none;
+        border-radius: 30px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        margin-bottom: 25px;
+    }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .login-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .login-button:hover i {
+            transform: translateX(5px);
+        }
+
+    .action-links {
+        text-align: center;
+        color: #666;
+    }
+
+    .register-link, .change-password-link {
+        margin: 10px 0;
+    }
+
+        .register-link a, .forgot-password {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+            .register-link a:hover, .forgot-password:hover {
+                color: #0056b3;
+            }
+
+    .alert-custom {
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        color: #856404;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .alert-close {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: #856404;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 0 5px;
+    }
+
+    .login-header h2 {
+        font-size: 24px;
+    }
+    }
+</style>

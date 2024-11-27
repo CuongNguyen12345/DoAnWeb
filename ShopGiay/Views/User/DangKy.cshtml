@@ -1,0 +1,288 @@
+﻿
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<style>
+    .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 20px;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 500px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+        .login-header h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+    .login-header-line {
+        height: 3px;
+        width: 50px;
+        background: #007bff;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .input-group {
+        position: relative;
+        border-bottom: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+    }
+
+        .input-group:focus-within {
+            border-color: #007bff;
+        }
+
+    .input-icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        font-size: 18px;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 12px 10px 12px 35px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        color: #333;
+        background: transparent;
+    }
+
+    .date-input {
+        color: #666;
+    }
+
+    .form-input::placeholder {
+        color: #999;
+    }
+
+    .error-message {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .button-group {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .login-button, .reset-button {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .login-button {
+        background: linear-gradient(45deg, #007bff, #00c6ff);
+    }
+
+    .reset-button {
+        background: linear-gradient(45deg, #6c757d, #868e96);
+    }
+
+        .login-button:hover, .reset-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-button i, .reset-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .login-button:hover i, .reset-button:hover i {
+            transform: translateX(5px);
+        }
+
+    .register-link {
+        text-align: center;
+        margin-top: 25px;
+        color: #666;
+    }
+
+        .register-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+            .register-link a:hover {
+                color: #0056b3;
+            }
+
+    .alert-custom {
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        color: #856404;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .alert-close {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: #856404;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 0 5px;
+    }
+
+    .login-header h2 {
+        font-size: 24px;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr;
+    }
+    }
+</style>
+
+
+<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">
+            <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
+            <div class="login-header-line"></div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(ViewBag.ThongBao))
+        {
+            <div class="alert-custom">
+                <i class="fas fa-exclamation-circle"></i>
+                @ViewBag.ThongBao
+                <button type="button" class="alert-close" onclick="this.parentElement.style.display='none'">&times;</button>
+            </div>
+        }
+
+        @using (Html.BeginForm("DangKy", "User", FormMethod.Post, new { @class = "login-form" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="input-group">
+                    <i class="fas fa-user input-icon"></i>
+                    @Html.TextBox("HoTen", null, new { @class = "form-input", placeholder = "Họ tên" })
+                </div>
+                @if (ViewData["err1"] != null)
+                {
+                    <div class="error-message">@ViewData["err1"]</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <i class="fas fa-user-circle input-icon"></i>
+                    @Html.TextBox("TaiKhoan", null, new { @class = "form-input", placeholder = "Tên đăng nhập" })
+                </div>
+                @if (ViewData["err2"] != null)
+                {
+                    <div class="error-message">@ViewData["err2"]</div>
+                }
+            </div>
+
+         
+
+            <div class="form-group">
+                <div class="input-group">
+                    <i class="fas fa-envelope input-icon"></i>
+                    @Html.TextBox("Email", null, new { @class = "form-input", placeholder = "Email" })
+                </div>
+                @if (ViewData["err5"] != null)
+                {
+                    <div class="error-message">@ViewData["err5"]</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <i class="fas fa-phone input-icon"></i>
+                    @Html.TextBox("DienThoai", null, new { @class = "form-input", placeholder = "Số điện thoại" })
+                </div>
+                @if (ViewData["err6"] != null)
+                {
+                    <div class="error-message">@ViewData["err6"]</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <i class="fas fa-calendar input-icon"></i>
+                    <input type="date" name="NgaySinh" class="form-input date-input" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                    <input type="text" name="DiaChi" class="form-input" placeholder="Địa chỉ" />
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="login-button">
+                    <span>ĐĂNG KÝ</span>
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <button type="reset" class="reset-button">
+                    <span>XÓA THÔNG TIN</span>
+                    <i class="fas fa-eraser"></i>
+                </button>
+            </div>
+        }
+
+        <div class="register-link">
+            <p>Đã có tài khoản? @Html.ActionLink("Đăng nhập ngay!", "DangNhap", "User")</p>
+        </div>
+    </div>
+</div>
+
+
+
+

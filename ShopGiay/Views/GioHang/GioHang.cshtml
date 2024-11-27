@@ -1,0 +1,117 @@
+﻿@model List<ShopGiay.Models.GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container py-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center mb-0" style="color: #fff;">THÔNG TIN GIỎ HÀNG</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Mã Giày</th>
+                            <th>Tên Giày</th>
+                            <th>Hình Ảnh</th>
+                            <th>Số Lượng</th>
+                            <th>Đơn Giá</th>
+                            <th>Thành Tiền</th>
+                            <th>Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.iMaGiay</td>
+                                <td>@item.sTenGiay</td>
+                                <td>
+                                    <img src="~/Images/@item.sAnhBia" class="img-thumbnail" style="width:100px;">
+                                </td>
+                                @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { iMaGiay = item.iMaGiay }))
+                                {
+                                    <td>
+                                        <input type="number" min="1" name="txtSoLuong" value="@item.iSoLuong"
+                                               class="form-control" style="width: 80px;" />
+                                    </td>
+                                    <td>@string.Format("{0:#,##0}", item.dDonGia) VNĐ</td>
+                                    <td>@string.Format("{0:#,##0}", item.dThanhTien) VNĐ</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-info btn-sm">
+                                                <i class="fas fa-sync-alt"></i> Cập nhật
+                                            </button>
+                                            @Html.ActionLink("Xóa", "XoaSPKhoiGioHang",
+                                                new { iMaGiay = item.iMaGiay },
+                                                new { @class = "btn btn-danger btn-sm ms-2" })
+                                        </div>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-end">
+                                <strong>Tổng số lượng: @string.Format("{0:#,##0}", ViewBag.TongSoLuong)</strong>
+                            </td>
+                            <td colspan="4" class="text-end">
+                                <strong>Tổng tiền: @string.Format("{0:#,##0}", ViewBag.TongTien) VNĐ</strong>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="@Url.Action("XoaGioHang")" class="btn btn-outline-danger">
+                    <i class="fas fa-trash"></i> Xóa giỏ hàng
+                </a>
+                <a href="@Url.Action("DatHang")" class="btn btn-primary">
+                    <i class="fas fa-shopping-cart"></i> ĐẶT HÀNG
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .table {
+        width: 100%; /* Đảm bảo bảng chiếm toàn bộ chiều rộng */
+        border-collapse: collapse; /* Tùy chọn này giúp loại bỏ khoảng cách giữa các ô */
+    }
+
+    .table th {
+        background: linear-gradient(45deg, #007bff, #00c6ff);
+        color: white;
+        font-weight: 600;
+    }
+
+    th, td {
+        padding: 10px; /* Tùy chỉnh khoảng cách trong ô */
+        text-align: left; /* Căn trái nội dung */
+    }
+
+    .btn-group .btn {
+        transition: all 0.3s ease;
+    }
+
+        .btn-group .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background: linear-gradient(45deg, #007bff, #00c6ff);
+        padding: 1.5rem;
+    }
+</style>

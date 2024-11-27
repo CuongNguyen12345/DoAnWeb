@@ -5,6 +5,7 @@
 @{
     ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
 }
 
 <style>
@@ -95,23 +96,7 @@
 
     @*@Html.Action("Aside", "User")*@
 
-    <aside>
-
-        <h3>
-            <i class="fa fa-list"></i>
-            DANH MỤC
-        </h3>
-        <ul>
-            <li><a href="#">Giày sân cỏ nhân tạo</a></li>
-            <li><a href="#">Giày sân cỏ tự nhiên</a></li>
-            <li><a href="#">Giày sân futsal</a></li>
-            <li><a href="#">NIKE</a></li>
-            <li><a href="#">ADIDAS</a></li>
-            <li><a href="#">PUMA</a></li>
-            <li><a href="#">MIZUNO</a></li>
-            <li><a href="#">KAMITO</a></li>
-        </ul>
-    </aside>
+    @Html.Action("ThuongHieu", "User")
 
     <section>
 

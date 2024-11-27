@@ -1,0 +1,159 @@
+﻿@model List<ShopGiay.Models.GioHang>
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var kh = (ShopGiay.Models.KHACHHANG)Session["TaiKhoan"];
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">THÔNG TIN ĐƠN HÀNG</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Tên Giày</th>
+                                    <th>Hình Ảnh</th>
+                                    <th>Số Lượng</th>
+                                    <th>Đơn Giá</th>
+                                    <th>Thành Tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.sTenGiay</td>
+                                        <td>
+                                            <img src="~/Images/@item.sAnhBia" class="img-thumbnail" style="width:80px;">
+                                        </td>
+                                        <td>@item.iSoLuong</td>
+                                        <td>@string.Format("{0:#,##0}", item.dDonGia) VNĐ</td>
+                                        <td>@string.Format("{0:#,##0}", item.dThanhTien) VNĐ</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" class="text-end">
+                                        <strong>Tổng số lượng:</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@string.Format("{0:#,##0}", ViewBag.TongSoLuong)</strong>
+                                    </td>
+                                    <td class="text-end">
+                                        <strong>Tổng tiền:</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@string.Format("{0:#,##0}", ViewBag.TongTien) VNĐ</strong>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">THÔNG TIN ĐẶT HÀNG</h3>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="mb-3">
+                            <label class="form-label">Họ tên:</label>
+                            <input type="text" class="form-control" value="@kh.HoTen" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Địa chỉ:</label>
+                            <input type="text" class="form-control" value="@kh.DiaChiKH" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Điện thoại:</label>
+                            <input type="text" class="form-control" value="@kh.DienThoaiKH" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày đặt:</label>
+                            <input type="text" class="form-control" value="@DateTime.Now.ToShortDateString()" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày giao:</label>
+                            <input type="date" name="NgayGiao" class="form-control" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Phương thức thanh toán:</label>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="thanhtoan"
+                                       value="nhanhang" checked id="cod">
+                                <label class="form-check-label" for="cod">
+                                    Thanh toán khi nhận hàng
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="thanhtoan"
+                                       value="vnpay" id="vnpay">
+                                <label class="form-check-label" for="vnpay">
+                                    Thanh toán qua VNPay
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-check-circle"></i> XÁC NHẬN ĐẶT HÀNG
+                            </button>
+                            <a href="@Url.Action("GioHang")" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> QUAY LẠI GIỎ HÀNG
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background: linear-gradient(45deg, #007bff, #00c6ff);
+        padding: 1.5rem;
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .form-check-input:checked {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .table {
+        width: 100%; /* Đảm bảo bảng chiếm toàn bộ chiều rộng */
+        border-collapse: collapse; /* Tùy chọn này giúp loại bỏ khoảng cách giữa các ô */
+    }
+</style>

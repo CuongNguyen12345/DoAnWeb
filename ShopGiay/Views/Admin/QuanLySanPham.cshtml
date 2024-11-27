@@ -1,14 +1,70 @@
-﻿
+﻿@using ShopGiay.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SANPHAM>
+
 @{
     ViewBag.Title = "QuanLySanPham";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var soTT = 1;
+    var TH = ViewBag.ThuongHieu as IEnumerable<ShopGiay.Models.THUONGHIEU>;
 }
+
+<style>
+    .MenuTrang {
+        display: inline;
+        text-align: center;
+    }
+
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+
+        .pagination > li {
+            display: inline;
+        }
+
+            .pagination > li:first-child > a, .pagination > li:first-child > span {
+                margin-left: 0;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+
+            .pagination > li > a, .pagination > li > span {
+                position: relative;
+                float: left;
+                padding: 6px 12px;
+                margin-left: -1px;
+                line-height: 1.42857143;
+                color: #337ab7;
+                text-decoration: none;
+                background-color: #fff;
+                border: 1px solid #ddd;
+            }
+
+        .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+            z-index: 3;
+            color: #fff;
+            cursor: default;
+            background-color: #337ab7;
+            border-color: #337ab7;
+        }
+
+        .pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
+            z-index: 2;
+            color: #23527c;
+            background-color: #eee;
+            border-color: #ddd;
+        }
+</style>
 
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
 
-            <h4 class="page-title">General Elements</h4>
+            <h4 class="page-title">Quản lý sản phẩm</h4>
         </div>
     </div>
 </div>
@@ -25,13 +81,14 @@
                         <div class="col-lg-4">
                             <input type="text" class="form-control" id="simpleinput">
                         </div>
-                        <label class="col-lg-2 col-form-label" for="simpleinput">Loại sản phẩm</label>
+                        <label class="col-lg-2 col-form-label" for="simpleinput">Thương Hiệu</label>
                         <div class="col-lg-4">
                             <select name="" id="" class="form-control">
-                                <option value="">--Chọn loại sản phẩm--</option>
-                                @*<option value="">Chăm sóc da</option>
-                                <option value="">Sữa rửa mặt</option>
-                                <option value="">Chăm sóc tóc</option>*@
+                                <option value="">--Chọn Thương Hiệu--</option>
+                                @foreach (var item in TH)
+                                {
+                                    <option value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                }
                             </select>
                         </div>
                     </div>
@@ -73,55 +130,42 @@
     <thead class="thead-light">
         <tr>
             <th>#</th>
-            <th>Tên sản phẩm</th>
-            <th>Hạn sử dụng</th>
-            <th>Giá cả</th>
-            <th>Thao tác</th>
+            <th>Tên Giày</th>
+            <th>Size</th>
+            <th>Giá Bán</th>
+            <th>Ảnh Bìa</th>
+            <th>Thao Tác</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Sữa rửa mặt dạng gel</td>
-            <td>20/12/2027</td>
-            <td>600.000 VND</td>
-            <td>
-                <a href="../Admin/SuaSanPham.html" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
-                    <i class="fe-edit-1"></i>
-                </a>
-                <button type="button" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
-                    <i class="fe-trash-2"></i>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Toner cấp ẩm</td>
-            <td>13/12/2027</td>
-            <td>800.000 VND</td>
-            <td>
-                <a href="../Admin/SuaSanPham.html" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
-                    <i class="fe-edit-1"></i>
-                </a>
-                <button type="button" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
-                    <i class="fe-trash-2"></i>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Kem dưỡng ẩm dạng gel</td>
-            <td>20/06/2027</td>
-            <td>900.000 VND</td>
-            <td>
-                <a href="../Admin/SuaSanPham.html" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
-                    <i class="fe-edit-1"></i>
-                </a>
-                <button type="button" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
-                    <i class="fe-trash-2"></i>
-                </button>
-            </td>
-        </tr>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <th scope="row">@soTT</th>
+                <td>@item.TenGiay</td>
+                <td>@item.Size</td>
+                <td>@Html.FormatValue(item.GiaBan, "{0:#,##0}") VNĐ</td>
+                <td>
+                    <img src="~/Images/@item.AnhBia" style=" width: 100px; height: 80px;" />
+                </td>
+                <td>
+                    <a href="../Admin/SuaSanPham.html" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
+                        <i class="fe-edit-1"></i>
+                    </a>
+                    <button type="button" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
+                        <i class="fe-trash-2"></i>
+                    </button>
+                </td>
+            </tr>
+
+            soTT++;
+        }
+
     </tbody>
 </table>
 
+<div>Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) / @Model.PageCount</div>
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("QuanLySanPham", new { page = page }))
+</div>

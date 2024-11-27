@@ -12,8 +12,17 @@
         {
             <div class="product-box">
                 <img src="~/Images/@item.AnhBia" class="product-img">
-                <h2 class="product-title">@item.TenGiay</h2>
                 <span class="price">@item.GiaBan đ</span>
+                <div class="caption">
+                    <h4 style="min-height:70px;">
+                        <a href="@Url.Action("ChiTietSanPham","User", new { id=item.MaGiay })">@item.TenGiay</a>
+                    </h4>
+                    <p>
+                        <a href="@Url.Action("ThemGioHang","GioHang", new { id = item.MaGiay, url = Request.Url.ToString() })" class="btn btn-warning" role="button">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+                        </a>
+                    </p>
+                </div>
                 <i class="fas fa-cart-shopping add-cart"></i>
             </div>
         }

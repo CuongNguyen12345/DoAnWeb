@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ShopGiay.Models.THUONGHIEU>
+
+<aside>
+
+    <h3>
+        <i class="fa fa-list"></i>
+        DANH MỤC
+    </h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@Url.Action("Product", "User", new {MaTT = item.MaThuongHieu})">@item.TenThuongHieu</a>
+            </li>
+        }
+
+        
+    </ul>
+</aside>
