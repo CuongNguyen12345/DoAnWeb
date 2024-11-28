@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "ThemSanPham";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var TH = ViewBag.ThuongHieu as IEnumerable<ShopGiay.Models.THUONGHIEU>;
+    var NCC = ViewBag.NhaCungCap as IEnumerable<ShopGiay.Models.NHACUNGCAP>;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+
+            <h4 class="page-title">General Elements</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Tìm kiếm sản phẩm</h4>
+                <br>
+
+                @using (Html.BeginForm("QuanLySanPham", "Admin", new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Tên sản phẩm</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="TenSP">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Thương Hiệu</label>
+                            <div class="col-lg-10">
+                                <select name="MaTT" class="form-control">
+                                    <option value="">--Chọn thương hiệu--</option>
+                                    @foreach (var item in TH)
+                                    {
+                                        <option value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Nhà Cung Cấp</label>
+                            <div class="col-lg-10">
+                                <select name="MaNCC" class="form-control">
+                                    <option value="">--Chọn nhà cung cấp--</option>
+                                    @foreach (var item in NCC)
+                                    {
+                                        <option value="@item.MaNCC">@item.TenNCC</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="Gia">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Size</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="Size">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Số lượng</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="soLuong">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Hình đại diện</label>
+                            <input type="file" class="col-lg-4" name="HinhAnhFiles">
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-3" style="margin-left: 80px;">
+                                <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                            </div>
+                            <div class="col-lg-3" style="margin-left: -100px;">
+                                <a href="@Url.Action("QuanLySanPham", "Admin")" class="btn btn-primary">Hủy thao tác</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+            </div> <!-- end card-box -->
+        </div> <!-- end card-->
+    </div><!-- end col -->
+</div>

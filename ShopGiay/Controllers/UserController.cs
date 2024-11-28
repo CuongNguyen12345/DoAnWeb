@@ -220,7 +220,26 @@ namespace ShopGiay.Controllers
             return View();
         }
         
+        public ActionResult DangXuat()
+        {
+            Session["HoTen"] = null;
 
+            if (Request.Cookies["TenDN"] != null)
+            {
+                var userNameCookie = new HttpCookie("TenDN");
+                userNameCookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(userNameCookie);
+            }
+
+            if (Request.Cookies["MatKhau"] != null)
+            {
+                var passwordCookie = new HttpCookie("MatKhau");
+                passwordCookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(passwordCookie);
+            }
+
+            return RedirectToAction("Index", "User");
+        }
         public ActionResult Header()
         {
             return PartialView();

@@ -63,6 +63,10 @@ namespace ShopGiay.Controllers
         [HttpGet]
         public ActionResult GioHang()
         {
+            if (Session["HoTen"] == null)
+            {
+                return RedirectToAction("DangNhap", "User");
+            }
             List<GioHang> lstGioHang = LayGioHang();
             if (lstGioHang.Count == 0)
             {

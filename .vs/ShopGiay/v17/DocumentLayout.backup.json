@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|d:\\my_workspace\\\u0111\u1ED3 \u00E1n web\\doanweb\\shopgiay\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|solutionrelative:shopgiay\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\shopgiay\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|solutionrelative:shopgiay\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\shopgiay\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|solutionrelative:shopgiay\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\shopgiay\\views\\admin\\quanlysanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|solutionrelative:shopgiay\\views\\admin\\quanlysanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|d:\\my_workspace\\\u0111\u1ED3 \u00E1n web\\doanweb\\shopgiay\\views\\admin\\themsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|solutionrelative:shopgiay\\views\\admin\\themsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\shopgiay\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|solutionrelative:shopgiay\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\shopgiay\\views\\giohang\\dathang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|solutionrelative:shopgiay\\views\\giohang\\dathang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\shopgiay\\views\\giohang\\giohang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{358A5701-FFDC-42F6-A15F-0606D493EE87}|ShopGiay\\ShopGiay.csproj|solutionrelative:shopgiay\\views\\giohang\\giohang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -75,87 +55,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GioHangController.cs",
-              "DocumentMoniker": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Controllers\\GioHangController.cs",
-              "RelativeDocumentMoniker": "ShopGiay\\Controllers\\GioHangController.cs",
-              "ToolTip": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Controllers\\GioHangController.cs",
-              "RelativeToolTip": "ShopGiay\\Controllers\\GioHangController.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAuwJQAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-27T11:13:27.445Z",
+              "Title": "ThemSanPham.cshtml",
+              "DocumentMoniker": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\Admin\\ThemSanPham.cshtml",
+              "RelativeDocumentMoniker": "ShopGiay\\Views\\Admin\\ThemSanPham.cshtml",
+              "ToolTip": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\Admin\\ThemSanPham.cshtml",
+              "RelativeToolTip": "ShopGiay\\Views\\Admin\\ThemSanPham.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAuwDsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T03:29:40.539Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GioHang.cshtml",
-              "DocumentMoniker": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\GioHang\\GioHang.cshtml",
-              "RelativeDocumentMoniker": "ShopGiay\\Views\\GioHang\\GioHang.cshtml",
-              "ToolTip": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\GioHang\\GioHang.cshtml",
-              "RelativeToolTip": "ShopGiay\\Views\\GioHang\\GioHang.cshtml",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAAFYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T10:59:01.943Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DatHang.cshtml",
-              "DocumentMoniker": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\GioHang\\DatHang.cshtml",
-              "RelativeDocumentMoniker": "ShopGiay\\Views\\GioHang\\DatHang.cshtml",
-              "ToolTip": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\GioHang\\DatHang.cshtml",
-              "RelativeToolTip": "ShopGiay\\Views\\GioHang\\DatHang.cshtml",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAADoAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T10:58:45.786Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "ShopGiay\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Controllers\\UserController.cs",
-              "RelativeToolTip": "ShopGiay\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAAAM8AAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-27T10:49:50.024Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_LayoutAdmin.cshtml",
-              "DocumentMoniker": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "RelativeDocumentMoniker": "ShopGiay\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "ToolTip": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "RelativeToolTip": "ShopGiay\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T10:43:43.227Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "QuanLySanPham.cshtml",
-              "DocumentMoniker": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\Admin\\QuanLySanPham.cshtml",
-              "RelativeDocumentMoniker": "ShopGiay\\Views\\Admin\\QuanLySanPham.cshtml",
-              "ToolTip": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Views\\Admin\\QuanLySanPham.cshtml",
-              "RelativeToolTip": "ShopGiay\\Views\\Admin\\QuanLySanPham.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T10:28:49.992Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "AdminController.cs",
               "DocumentMoniker": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "ShopGiay\\Controllers\\AdminController.cs",
               "ToolTip": "D:\\My_WorkSpace\\\u0110\u1ED3 \u00E1n Web\\DoAnWeb\\ShopGiay\\Controllers\\AdminController.cs",
               "RelativeToolTip": "ShopGiay\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAYwCEAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAWwEUAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-27T10:08:20.137Z"
+              "WhenOpened": "2024-11-27T16:36:27.181Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -392,6 +392,7 @@
     <Content Include="Views\GioHang\XacNhanDonHang.cshtml" />
     <Content Include="Views\GioHang\GioHangPartial.cshtml" />
     <Content Include="Views\User\ThuongHieu.cshtml" />
+    <Content Include="Views\Admin\ThemSanPham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

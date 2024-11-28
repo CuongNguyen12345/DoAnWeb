@@ -75,50 +75,57 @@
             <div class="card-body">
                 <h4 class="header-title">Tìm kiếm sản phẩm</h4>
                 <br>
-                <form class="form-horizontal">
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label" for="simpleinput">Tên sản phẩm</label>
-                        <div class="col-lg-4">
-                            <input type="text" class="form-control" id="simpleinput">
+
+                @using (Html.BeginForm("QuanLySanPham", "Admin", FormMethod.Get))
+                {
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Tên sản phẩm</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" name="TenSP" value="@Request["TenSP"]">
+                            </div>
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Thương Hiệu</label>
+                            <div class="col-lg-4">
+                                <select name="MaTT" id="MaTT" class="form-control">
+                                    <option value="">--Chọn Thương Hiệu--</option>
+                                    @{ 
+                                        int MaTT = string.IsNullOrEmpty(Request["MaTT"]) ? 0 : int.Parse(Request["MaTT"]);
+                                    }
+
+                                    @foreach (var item in TH)
+                                    {
+                                        <option value="@item.MaThuongHieu" @(MaTT == item.MaThuongHieu ? "selected" : "") >@item.TenThuongHieu</option>
+                                    }
+                                </select>
+                            </div>
                         </div>
-                        <label class="col-lg-2 col-form-label" for="simpleinput">Thương Hiệu</label>
-                        <div class="col-lg-4">
-                            <select name="" id="" class="form-control">
-                                <option value="">--Chọn Thương Hiệu--</option>
-                                @foreach (var item in TH)
-                                {
-                                    <option value="@item.MaThuongHieu">@item.TenThuongHieu</option>
-                                }
-                            </select>
-                        </div>
+
                     </div>
 
-
-
-                </form>
-
-                <form class="form-horizontal">
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả từ</label>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" id="simpleinput">
-                        </div>
-                        <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả đến</label>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" id="simpleinput">
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả từ</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="GiaTu" value="@Request["GiaTu"]">
+                            </div>
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả đến</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="GiaDen" value="@Request["GiaDen"]">
+                            </div>
                         </div>
                     </div>
-                </form>
-                <div class="button-list">
-                    <a href="../Admin/ThemSanPham.html" class="btn btn-warning float-right" title="Thêm sản phẩm">
-                        <i class="fe-plus"></i>
-                    </a>
+                    <div class="button-list">
+                        <a href="@Url.Action("ThemSanPham", "Admin")" class="btn btn-warning float-right" title="Thêm sản phẩm">
+                            <i class="fe-plus"></i>
+                        </a>
 
-                    <button type="button" class="btn btn-success float-right" title="Tìm kiếm sản phẩm">
-                        <i class="fe-search"></i>
-                    </button>
+                        <button type="submit" class="btn btn-success float-right" title="Tìm kiếm sản phẩm">
+                            <i class="fe-search"></i>
+                        </button>
 
-                </div>
+                    </div>
+                }
+
 
 
             </div> <!-- end card-box -->
