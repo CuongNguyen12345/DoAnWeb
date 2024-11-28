@@ -99,7 +99,7 @@
     <Property Name="MaGiay" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TenGiay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Size" Type="Byte" Nullable="false" />
-    <Property Name="AnhBia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AnhBia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="GiaBan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="MaThuongHieu" Type="Int32" />
     <Property Name="TrangThai" Type="Boolean" />

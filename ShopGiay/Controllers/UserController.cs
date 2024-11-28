@@ -38,7 +38,7 @@ namespace ShopGiay.Controllers
                 string body = $@"
          <table style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd;'>
              <tr>
-                 <td style='background-color: #4CAF50; padding: 25px; text-align: center; color: white;'>
+                 <td style='background: linear-gradient(45deg, #007bff, #00c6ff); padding: 25px; text-align: center; color: white;'>
                      <h2 style='font-size: 28px; margin: 0;'>Xác nhận đăng ký thành công</h2>
                      <p style='font-size: 16px; margin: 0;'>Cảm ơn bạn đã đăng ký thành viên tại <strong>Shop Giày</strong>!</p>
                  </td>
@@ -52,13 +52,13 @@ namespace ShopGiay.Controllers
                      <p style='color: #FF5733; font-size: 18px; margin-top: 20px;'><strong>MẬT KHẨU CỦA BẠN LÀ:</strong> {matKhauNgauNhien}</p>
                      
                      <p style='margin-top: 20px; font-size: 14px; color: #666;'>Nếu có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua email: 
-                         <a href='mailto:Quynhnhuvh19@gmail.com' style='color: #4CAF50; text-decoration: none;'>DevNguyen@gmail.com</a>.
+                         <a href='mailto:Quynhnhuvh19@gmail.com' style='color: #006EC7; text-decoration: none;'>DevNguyen@gmail.com</a>.
                      </p>
                      <p style='margin-top: 15px; font-size: 14px; color: #666;'>Trân trọng,<br/><strong>Giày chất lượng cao</strong></p>
                  </td>
              </tr>
              <tr>
-                 <td style='background-color: #4CAF50; padding: 15px; text-align: center; color: white;'>
+                 <td style='background: linear-gradient(45deg, #007bff, #00c6ff); padding: 15px; text-align: center; color: white;'>
                      <p style='margin: 0; font-size: 14px;'>&copy; 2024 Shop Giày. Dev Nguyen.</p>
                  </td>
              </tr>
@@ -187,9 +187,11 @@ namespace ShopGiay.Controllers
             {
                 string _hassPassword = HashPassword(sMatKhau);
                 KHACHHANG kh = db.KHACHHANGs.SingleOrDefault(n => n.TaiKhoanKH == sTenDN && n.MatKhau == _hassPassword);
+                
                 QUANLY ql = db.QUANLies.SingleOrDefault(n => n.TaiKhoanQL == sTenDN && n.MatKhau == sMatKhau);
                 if (kh != null)
                 {
+ 
                     ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                     Session["Taikhoan"] = kh;
                     if (collection["remember"].Contains("true"))

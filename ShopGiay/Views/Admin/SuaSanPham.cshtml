@@ -1,6 +1,7 @@
-﻿
+﻿@model ShopGiay.Models.SANPHAM
+
 @{
-    ViewBag.Title = "ThemSanPham";
+    ViewBag.Title = "SuaSanPham";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var TH = ViewBag.ThuongHieu as IEnumerable<ShopGiay.Models.THUONGHIEU>;
     var NCC = ViewBag.NhaCungCap as IEnumerable<ShopGiay.Models.NHACUNGCAP>;
@@ -19,16 +20,16 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Thêm sản phẩm</h4>
+                <h4 class="header-title">Sửa sản phẩm</h4>
                 <br>
 
-                @using (Html.BeginForm("ThemSanPham", "Admin", FormMethod.Post ,new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("SuaSanPham", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <div class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" for="simpleinput">Tên sản phẩm</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="TenSP">
+                                <input type="text" class="form-control" name="TenSP" value="@Model.TenGiay">
                             </div>
                         </div>
                     </div>
@@ -41,7 +42,7 @@
                                     <option value="">--Chọn thương hiệu--</option>
                                     @foreach (var item in TH)
                                     {
-                                        <option value="@item.MaThuongHieu">@item.TenThuongHieu</option>
+                                        <option value="@item.MaThuongHieu" @(Model.MaThuongHieu == item.MaThuongHieu ? "selected" : "")>@item.TenThuongHieu</option>
                                     }
                                 </select>
                             </div>
@@ -56,17 +57,18 @@
                                     <option value="">--Chọn nhà cung cấp--</option>
                                     @foreach (var item in NCC)
                                     {
-                                        <option value="@item.MaNCC">@item.TenNCC</option>
+                                        <option value="@item.MaNCC" @(Model.MaNCC == item.MaNCC ? "selected" : "")>@item.TenNCC</option>
                                     }
                                 </select>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="Gia">
+                                <input type="text" class="form-control" name="Gia" value="@Model.GiaBan">
                             </div>
                         </div>
                     </div>
@@ -75,7 +77,7 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" for="simpleinput">Size</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="Size">
+                                <input type="text" class="form-control" name="Size" value="@Model.Size">
                             </div>
                         </div>
                     </div>
@@ -84,18 +86,18 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" for="simpleinput">Số lượng</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="soLuong">
+                                <input type="text" class="form-control" name="soLuong" value="@Model.SoLuongTon">
                             </div>
                         </div>
                     </div>
+                    
                     <div class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" for="simpleinput">Hình đại diện</label>
                             <input type="file" class="col-lg-4" id="fileInput" name="HinhAnhFiles" onchange="previewImage()">
                             <div class="col-lg-6">
-                                <img id="imagePreview" width="300px" height="300px">
+                                <img src="~/Images/@Model.AnhBia" id="imagePreview" width="300px" height="300px">
                             </div>
-                            
                         </div>
                     </div>
 
@@ -103,7 +105,7 @@
                         <div class="form-group row">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-3" style="margin-left: 80px;">
-                                <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                                <button type="submit" class="btn btn-primary">Sửa sản phẩm</button>
                             </div>
                             <div class="col-lg-3" style="margin-left: -100px;">
                                 <a href="@Url.Action("QuanLySanPham", "Admin")" class="btn btn-primary">Hủy thao tác</a>
@@ -111,9 +113,6 @@
                         </div>
                     </div>
                 }
-
-
-
             </div> <!-- end card-box -->
         </div> <!-- end card-->
     </div><!-- end col -->

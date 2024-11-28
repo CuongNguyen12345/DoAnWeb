@@ -227,6 +227,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\favicon.ico" />
     <Content Include="Images\onfire.png" />
     <Content Include="Images\Screenshot 2023-03-22 151328.png" />
     <Content Include="Images\Screenshot 2023-04-01 231732.png" />
@@ -296,6 +297,7 @@
     <Content Include="Images\Screenshot 2023-04-04 103456.png" />
     <Content Include="Images\Screenshot 2023-04-04 103744.png" />
     <Content Include="Images\Screenshot 2024-03-17 223642.png" />
+    <Content Include="Images\Screenshot 2024-11-28 221911.png" />
     <Content Include="Models\ShopGiay.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ShopGiay.Context.cs</LastGenOutput>
@@ -393,6 +395,7 @@
     <Content Include="Views\GioHang\GioHangPartial.cshtml" />
     <Content Include="Views\User\ThuongHieu.cshtml" />
     <Content Include="Views\Admin\ThemSanPham.cshtml" />
+    <Content Include="Views\Admin\SuaSanPham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

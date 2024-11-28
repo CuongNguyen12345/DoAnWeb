@@ -7,6 +7,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var soTT = 1;
     var TH = ViewBag.ThuongHieu as IEnumerable<ShopGiay.Models.THUONGHIEU>;
+    int MaTT = string.IsNullOrEmpty(Request["MaTT"]) ? 0 : int.Parse(Request["MaTT"]);
 }
 
 <style>
@@ -88,13 +89,9 @@
                             <div class="col-lg-4">
                                 <select name="MaTT" id="MaTT" class="form-control">
                                     <option value="">--Chọn Thương Hiệu--</option>
-                                    @{ 
-                                        int MaTT = string.IsNullOrEmpty(Request["MaTT"]) ? 0 : int.Parse(Request["MaTT"]);
-                                    }
-
                                     @foreach (var item in TH)
                                     {
-                                        <option value="@item.MaThuongHieu" @(MaTT == item.MaThuongHieu ? "selected" : "") >@item.TenThuongHieu</option>
+                                        <option value="@item.MaThuongHieu" @(MaTT == item.MaThuongHieu ? "selected" : "")>@item.TenThuongHieu</option>
                                     }
                                 </select>
                             </div>
@@ -111,6 +108,31 @@
                             <label class="col-lg-2 col-form-label" for="simpleinput">Giá cả đến</label>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" name="GiaDen" value="@Request["GiaDen"]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Số lượng từ</label>
+                            <div class="col-lg-1">
+                                <input type="text" class="form-control" name="SoLuongTu" value="@Request["SoLuongTu"]">
+                            </div>
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Số lượng đến</label>
+                            <div class="col-lg-1">
+                                <input type="text" class="form-control" name="SoLuongDen" value="@Request["SoLuongDen"]">
+                            </div>
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Trạng thái</label>
+                            <div class="col-lg-4">
+                                <select name="TrangThai" class="form-control">
+                                    <option value="">--Trạng thái--</option>
+                                    @{ 
+                                        string trangThai = string.IsNullOrEmpty(Request["TrangThai"]) ? "" : Request["TrangThai"];
+                                    }
+
+                                    <option value="true" @(trangThai.Equals("true") ? "selected" : "")>Đang hiện</option>
+                                    <option value="false" @(trangThai.Equals("false") ? "selected" : "")>Đã ẩn</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -140,31 +162,60 @@
             <th>Tên Giày</th>
             <th>Size</th>
             <th>Giá Bán</th>
+            <th>Số Lượng</th>
             <th>Ảnh Bìa</th>
+            <th>Trạng Thái</th>
             <th>Thao Tác</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
+            if (item.TrangThai == true)
+            {
+                <tr>
+                    <th scope="row">@soTT</th>
+                    <td>@item.TenGiay</td>
+                    <td>@item.Size</td>
+                    <td>@Html.FormatValue(item.GiaBan, "{0:#,##0}") VNĐ</td>
+                    <td>@item.SoLuongTon</td>
+                    <td>
+                        <img src="~/Images/@item.AnhBia" style=" width: 100px; height: 80px;" />
+                    </td>
+                    <td>Đang hiện</td>
+                    <td>
+                        <a href="@Url.Action("SuaSanPham", "Admin", new {MaSP = item.MaGiay})" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
+                            <i class="fe-edit-1"></i>
+                        </a>
+                        <a href="@Url.Action("XoaSanPham", "Admin", new {MaSP = @item.MaGiay})" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
+                            <i class="fe-trash-2"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th scope="row">@soTT</th>
+                    <td>@item.TenGiay</td>
+                    <td>@item.Size</td>
+                    <td>@Html.FormatValue(item.GiaBan, "{0:#,##0}") VNĐ</td>
+                    <td>@item.SoLuongTon</td>
+                    <td>
+                        <img src="~/Images/@item.AnhBia" style=" width: 100px; height: 80px;" />
+                    </td>
+                    <td>Đã ẩn</td>
+                    <td>
+                        <a href="@Url.Action("SuaSanPham", "Admin", new {MaSP = item.MaGiay})" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
+                            <i class="fe-edit-1"></i>
+                        </a>
+                        <a href="@Url.Action("HienSanPham", "Admin", new {MaSP = item.MaGiay})" class="btn btn-success btn-sm" title="Xóa sản phẩm">
+                            <i class="fa-solid fa-recycle"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
 
-            <tr>
-                <th scope="row">@soTT</th>
-                <td>@item.TenGiay</td>
-                <td>@item.Size</td>
-                <td>@Html.FormatValue(item.GiaBan, "{0:#,##0}") VNĐ</td>
-                <td>
-                    <img src="~/Images/@item.AnhBia" style=" width: 100px; height: 80px;" />
-                </td>
-                <td>
-                    <a href="../Admin/SuaSanPham.html" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
-                        <i class="fe-edit-1"></i>
-                    </a>
-                    <button type="button" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
-                        <i class="fe-trash-2"></i>
-                    </button>
-                </td>
-            </tr>
 
             soTT++;
         }
@@ -174,5 +225,13 @@
 
 <div>Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) / @Model.PageCount</div>
 <div class="MenuTrang">
-    @Html.PagedListPager(Model, page => Url.Action("QuanLySanPham", new { page = page }))
+    @Html.PagedListPager(Model, page => Url.Action("QuanLySanPham", new
+    {
+        page = page,
+                                                                          TenSP = Request["TenSP"],
+                                                                          MaTT = MaTT,
+                                                                          GiaTu = Request["GiaTu"],
+                                                                          GiaDen = Request["GiaDen"]
+                                                                        }))
 </div>
+

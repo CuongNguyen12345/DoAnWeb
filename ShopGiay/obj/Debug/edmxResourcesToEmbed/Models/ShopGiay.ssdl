@@ -90,7 +90,7 @@
     <Property Name="MaGiay" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenGiay" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Size" Type="tinyint" Nullable="false" />
-    <Property Name="AnhBia" Type="varchar" MaxLength="50" />
+    <Property Name="AnhBia" Type="varchar" MaxLength="255" />
     <Property Name="GiaBan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="MaThuongHieu" Type="int" />
     <Property Name="TrangThai" Type="bit" />

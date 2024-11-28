@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -147,8 +149,10 @@ namespace ShopGiay.Controllers
             var NgayGiao = String.Format("{0:MM/dd/yyyy}", f["NgayGiao"]);
             ddh.NgayGiao = DateTime.Parse(NgayGiao);
             ddh.TinhTrangGiaoHang = true;
+            ddh.TongTien = TongTien();
             //ddh.DaThanhToan = false;
 
+            GuiEmailXacNhan(kh.EmailKH, ddh);
             db.DONHANGs.Add(ddh);
             db.SaveChanges();
 
@@ -158,7 +162,7 @@ namespace ShopGiay.Controllers
                 ctdh.MaDonHang = ddh.MaDonHang;
                 ctdh.MaGiay = item.iMaGiay;
                 ctdh.SoLuong = item.iSoLuong;
-                //ctdh.DonGia = (decimal)item.dDonGia;
+                ctdh.ThanhTien = (decimal)item.dDonGia;
                 db.CT_DONHANG.Add(ctdh);
             }
             db.SaveChanges();
@@ -166,6 +170,83 @@ namespace ShopGiay.Controllers
             return RedirectToAction("XacNhanDonHang", "GioHang");
         }
 
+        private void GuiEmailXacNhan(string email, DONHANG order)
+        {
+            string username = "Quynhnhuvh19@gmail.com";
+            string password = "cnjj hlij byjd hclu";
+
+            try
+            {
+                string body = $@"
+<div style='font-family:Arial, sans-serif; max-width:600px; margin:auto; border:1px solid #ddd; border-radius:8px; overflow:hidden; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);'>
+    <div style='background: linear-gradient(45deg, #007bff, #00c6ff); padding:25px; text-align:center; color:white;'>
+        <h2 style='font-size:28px; margin-bottom:10px;'>Xác nhận đơn hàng</h2>
+        <p style='font-size:16px; margin:0;'>Cảm ơn bạn đã đặt hàng tại <b>Shop Giay</b>!</p>
+    </div>
+    <div style='padding:30px; background-color:#fafafa;'>
+        <h3 style='font-size:22px; color:#333; margin-bottom:15px;'>Chi tiết đơn hàng</h3>
+        <table style='width:100%; border-collapse:collapse;'>
+            <thead>
+                <tr style='=color:#555;'>
+                    <th style='background: linear-gradient(45deg, #007bff, #00c6ff); padding:12px; border-bottom:2px solid #fff;'>STT</th>
+                    <th style='background: linear-gradient(45deg, #007bff, #00c6ff); padding:12px; border-bottom:2px solid #fff;'>Tên Sản Phẩm</th>
+                    <th style='background: linear-gradient(45deg, #007bff, #00c6ff); padding:12px; border-bottom:2px solid #fff;'>Số Lượng</th>
+                    <th style='background: linear-gradient(45deg, #007bff, #00c6ff); padding:12px; border-bottom:2px solid #fff;'>Đơn Giá</th>
+                    <th style='background: linear-gradient(45deg, #007bff, #00c6ff); padding:12px; border-bottom:2px solid #fff;'>Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>";
+                int stt = 1;
+                foreach (var item in LayGioHang())
+                {
+
+                    body += $@"
+                <tr style='background-color:#fff; border-bottom:1px solid #eee;'>
+                    <td style='padding:10px; text-align:center; color:#333;'>{stt++}</td>
+                    <td style='padding:10px; color:#333;'>{item.sTenGiay}</td>
+                    <td style='padding:10px; text-align:center; color:#333;'>{item.iSoLuong}</td>
+                    <td style='padding:10px; text-align:right; color:#333;'>{item.dDonGia:#,##0} VNĐ</td>
+                    <td style='padding:10px; text-align:right; color:#333;'>{item.dThanhTien:#,##0} VNĐ</td>
+                </tr>";
+                }
+
+                body += $@"
+            </tbody>
+        </table>
+        <div style='text-align:right; margin-top:20px; font-size:16px; color:#333;'>
+            <p><b>Tổng tiền:</b> {TongTien():#,##0} VNĐ</p>
+        </div>
+        <p style='margin-top:20px; font-size:14px; color:#666;'> Cảm ơn bạn đã mua sản phẩm, nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua email: 
+            <a href='mailto:Quynhnhuvh19@gmail.com' style='color:#4CAF50; text-decoration:none;'>DevNguyen@gmail.com</a>.
+        </p>
+        <p style='margin-top:15px; font-size:14px; color:#666;'>Trân trọng,<br/><b>Giày chất lượng cao</b></p>
+    </div>
+    <div style='background: linear-gradient(45deg, #007bff, #00c6ff); padding:15px; text-align:center; color:white;'>
+        <p style='margin:0; font-size:14px;'>&copy; 2024 Shop Giày. Dev Nguyen.</p>
+    </div>
+</div>";
+
+
+                // Cấu hình email
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(username);
+                mail.To.Add(email);
+                mail.Subject = "Xác Nhận Đơn Hàng";
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                // Cấu hình SMTP
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.Credentials = new NetworkCredential(username, password);
+                smtp.EnableSsl = true;
+
+                // Gửi email
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Gửi email thất bại: " + ex.Message);
+            }
+        }
         [HttpGet]
         public ActionResult XacNhanDonHang()
         {
