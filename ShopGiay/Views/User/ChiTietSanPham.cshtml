@@ -32,6 +32,65 @@
         gap: 0.5rem;
         transition: background 0.3s ease;
     }
+
+    .comments-section {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+        .comments-section h3 {
+            background-color: #f3f4f6;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+    .comment-form {
+        margin-bottom: 2rem;
+    }
+
+    .comment-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        resize: vertical;
+    }
+
+    .comment-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .comment-item {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        background-color: #f3f4f6;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+    }
+
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+    }
+
+    .comment-author {
+        font-weight: bold;
+        color: #2563eb;
+    }
+
+    .comment-date {
+        color: #666;
+        font-size: 0.875rem;
+    }
 </style>
 
 <div class="container">
@@ -40,20 +99,13 @@
         <div class="main-image">
             <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
             @{
-               
+
                 <img src="~/Images/@Model.AnhBia" alt="Product">
             }
 
             <button class="gallery-nav next"><i class="fas fa-chevron-right"></i></button>
         </div>
-        <div class="thumbnail-container">
-            <div class="thumbnails">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" class="active" alt="Thumbnail 1">
-                <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5" alt="Thumbnail 2">
-                <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c" alt="Thumbnail 3">
-                <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519" alt="Thumbnail 4">
-            </div>
-        </div>
+        
     </div>
     <div>
         <h1 class="product-title">@Model.TenGiay</h1>
@@ -70,7 +122,8 @@
         </div>
 
         <div class="product-price">
-            <p class="giaban">Giá bán: 
+            <p class="giaban">
+                Giá bán:
                 <span>
                     @Html.FormatValue(@Model.GiaBan, "{0:#,##0}") VNĐ
                 </span>
@@ -100,9 +153,9 @@
 
         <div class="product-actions">
             @*<button class="add-to-cart">
-            <i class="fas fa-shopping-cart"></i>
-            Thêm vào giỏ hàng
-        </button>*@
+                    <i class="fas fa-shopping-cart"></i>
+                    Thêm vào giỏ hàng
+                </button>*@
 
             <a href="@Url.Action("ThemGioHang", "GioHang" ,new { id = Model.MaGiay, url = Request.Url.ToString() })"
                class="btn btn-primary" role="button">
@@ -110,7 +163,7 @@
                     Add to cart
 
                 </span>
-                
+
             </a>
             <button class="add-to-wishlist">
                 <i class="fas fa-heart"></i>
@@ -139,4 +192,9 @@
             <li>Phù hợp mọi vị trí trên sân</li>
         </ul>
     </div>
+
+    @Html.Action("ThemBinhLuan", "User")
+
+
+
 </div>

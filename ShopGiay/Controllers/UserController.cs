@@ -17,6 +17,7 @@ namespace ShopGiay.Controllers
     public class UserController : Controller
     {
         ShopGiayEntities db = new ShopGiayEntities();
+        private static int MaGiayGolbal = 0;
         // GET: User
         public ActionResult Index()
         {
@@ -277,11 +278,48 @@ namespace ShopGiay.Controllers
         [HttpGet]
         public ActionResult ChiTietSanPham(int id)
         {
-            var SanPham = (from s in db.SANPHAMs
-                          where s.MaGiay == id
-                          select s).FirstOrDefault();
+            var SanPham = db.SANPHAMs.SingleOrDefault(s => s.MaGiay.Equals(id));
+            MaGiayGolbal = id;
             return View(SanPham);
         }
+
+        [HttpGet]
+        public ActionResult ThemBinhLuan()
+        {
+            ViewBag.MaGiay = MaGiayGolbal;
+
+            var lstBL = db.BINHLUANs
+                                 .Where(b => b.MaSP == MaGiayGolbal)
+                                 .OrderByDescending(b => b.NgayBinhLuan)
+                                 .ToList();
+            return PartialView(lstBL);
+        }
+
+        [HttpPost]
+        public ActionResult ThemBinhLuan(int maSP, string binhLuan)
+        {
+            if (Session["Taikhoan"] == null)
+            {
+                return RedirectToAction("DangNhap");
+            }
+
+            var khachHang = (KHACHHANG)Session["Taikhoan"];
+
+            var bl = new BINHLUAN
+            {
+                MaKH = khachHang.MaKH,
+                TenKH = khachHang.HoTen,
+                MaSP = maSP,
+                BinhLuan1 = binhLuan,
+                NgayBinhLuan = DateTime.Now
+            };
+                
+            db.BINHLUANs.Add(bl);
+            db.SaveChanges();
+
+            return RedirectToAction("ChiTietSanPham", new { id = maSP });
+        }
+
         public ActionResult PhuKien()
         {
             return View();

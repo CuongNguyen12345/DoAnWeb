@@ -18,6 +18,7 @@ namespace ShopGiay.Models
         public SANPHAM()
         {
             this.CT_DONHANG = new HashSet<CT_DONHANG>();
+            this.BINHLUANs = new HashSet<BINHLUAN>();
         }
     
         public int MaGiay { get; set; }
@@ -38,5 +39,7 @@ namespace ShopGiay.Models
         public virtual LOAIGIAY LOAIGIAY { get; set; }
         public virtual NHACUNGCAP NHACUNGCAP { get; set; }
         public virtual THUONGHIEU THUONGHIEU { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BINHLUAN> BINHLUANs { get; set; }
     }
 }

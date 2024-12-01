@@ -22,7 +22,7 @@ namespace ShopGiay.Models
     
         public int MaDonHang { get; set; }
         public Nullable<bool> TinhTrangGiaoHang { get; set; }
-        public Nullable<System.DateTime> NgayDat { get; set; }
+        public System.DateTime NgayDat { get; set; }
         public Nullable<System.DateTime> NgayGiao { get; set; }
         public Nullable<decimal> TongTien { get; set; }
         public Nullable<int> MaKH { get; set; }

@@ -28,6 +28,20 @@ namespace ShopGiay.Controllers
         }
 
         [HttpGet]
+        public JsonResult DoanhThu()
+        {
+            var doanhThuTheoThang = (from donHang in db.DONHANGs
+                                     group donHang by new { Month = donHang.NgayDat.Month } into g
+                                     select new
+                                     {
+                                         Thang = g.Key.Month,
+                                         DoanhThu = g.Sum(d => d.TongTien)
+                                     })
+                                     .OrderBy(o => o.Thang)
+                                     .ToList();
+            return Json(doanhThuTheoThang, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
         public ActionResult QuanLySanPham(int? Page)
         {
             Page = Page ?? 1;
@@ -198,6 +212,62 @@ namespace ShopGiay.Controllers
         public ActionResult Sidebar_Menu()
         {
             return PartialView();
+        }
+
+        [HttpGet]
+        public ActionResult QuanLyVoucher()
+        {
+            var list = db.KHUYENMAIs.ToList();
+            return View(list);
+        }
+
+        [HttpGet]
+        public ActionResult ThemVoucher()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemVoucher(FormCollection f)
+        {
+            string tenKM = f["TenKM"];
+            string phanTramGiam = f["PhanTramGiam"];
+            DateTime ngayBD = DateTime.Parse(f["NgayBatDau"]);
+            DateTime ngayKT = DateTime.Parse(f["NgayKetThuc"]);
+
+            KHUYENMAI km = new KHUYENMAI();
+            km.TenKM = tenKM;
+            //km.PhanTramGiam = phanTramGiam;
+            km.NgayBatDau = ngayBD;
+            km.NgayKetThuc = ngayKT;
+            db.KHUYENMAIs.Add(km);
+
+            db.SaveChanges();
+            return RedirectToAction("ThemVoucher", "Admin");
+        }
+
+        public ActionResult QuanLyDonHang()
+        {
+
+            ViewBag.lstDH = (from kh in db.KHACHHANGs
+                        join dh in db.DONHANGs on kh.MaKH equals dh.MaKH
+                        join ctdh in db.CT_DONHANG on dh.MaDonHang equals ctdh.MaDonHang
+                        group ctdh by new { kh.MaKH, kh.HoTen, dh.MaDonHang, dh.TongTien } into g
+                        select new ViewBagModel
+                        {
+                            MaKH = g.Key.MaKH,
+                            TenKH = g.Key.HoTen,
+                            MaDH = g.Key.MaDonHang,
+                            SoLuongSP = g.Count(),
+                            TongTien = g.Key.TongTien ?? 0
+                        }).ToList();
+
+            return View();
+        }
+
+        public ActionResult ChiTietDonHang()
+        {
+            return View();
         }
     }
 }

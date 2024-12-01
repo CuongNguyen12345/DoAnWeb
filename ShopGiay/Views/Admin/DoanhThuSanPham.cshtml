@@ -30,41 +30,69 @@
 
 
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="~/Scripts/js/Chart.bundle.min.js"></script>
 <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar', // Loại biểu đồ: bar, line, pie, doughnut, radar, scatter, bubble, ...
-            data: {
-                labels: ['Tháng 1',
-                         'Tháng 2',
-                         'Tháng 3',
-                         'Tháng 4',
-                         'Tháng 5',
-                         'Tháng 6',
-                         'Tháng 7',
-                         'Tháng 8',
-                         'Tháng 9',
-                         'Tháng 10',
-                         'Tháng 11',
-                         'Tháng 12'
-                        ],
-                datasets: [{
-                    label: 'Doanh thu (tỷ VND)',
-                    data: [12, 19, 3, 5, 2, 7, 8, 9, 11, 12, 13, 21],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+
+
+    $.ajax({
+        url: '/Admin/DoanhThu',
+        method: 'GET',
+        success: function (data) {
+            var months = data.map(item => `${item.Thang}`);
+            var revenueData = data.map(item => item.DoanhThu);
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var revenueChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Doanh Thu (VNĐ)',
+                        data: revenueData,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 1
+                    }]
                 }
-            }
-        });
+            });
+        }
+    });
+
+        //const ctx = document.getElementById('myChart').getContext('2d');
+        //const myChart = new Chart(ctx, {
+        //    type: 'bar', // Loại biểu đồ: bar, line, pie, doughnut, radar, scatter, bubble, ...
+        //    data: {
+        //        labels: ['Tháng 1',
+        //                 'Tháng 2',
+        //                 'Tháng 3',
+        //                 'Tháng 4',
+        //                 'Tháng 5',
+        //                 'Tháng 6',
+        //                 'Tháng 7',
+        //                 'Tháng 8',
+        //                 'Tháng 9',
+        //                 'Tháng 10',
+        //                 'Tháng 11',
+        //                 'Tháng 12'
+        //                ],
+        //        datasets: [{
+        //            label: 'Doanh thu (tỷ VND)',
+        //            data: [12, 19, 3, 5, 2, 7, 8, 9, 11, 12, 13, 21],
+        //            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        //            borderColor: 'rgba(75, 192, 192, 1)',
+        //            borderWidth: 1
+        //        }]
+        //    },
+        //    options: {
+        //        responsive: true,
+        //        scales: {
+        //            y: {
+        //                beginAtZero: true
+        //            }
+        //        }
+        //    }
+        //});
+
+
 </script>

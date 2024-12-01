@@ -1,71 +1,15 @@
-﻿@using ShopGiay.Models;
-@using PagedList.Mvc;
-@model PagedList.PagedList<SANPHAM>
-
+﻿
 @{
-    ViewBag.Title = "QuanLySanPham";
+    ViewBag.Title = "QuanLyDonHang";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    var soTT = 1;
-    var TH = ViewBag.ThuongHieu as IEnumerable<ShopGiay.Models.THUONGHIEU>;
-    int MaTT = string.IsNullOrEmpty(Request["MaTT"]) ? 0 : int.Parse(Request["MaTT"]);
+    int soTT = 1;
 }
-
-<style>
-    .MenuTrang {
-        display: inline;
-        text-align: center;
-    }
-
-    .pagination {
-        display: inline-block;
-        padding-left: 0;
-        margin: 20px 0;
-        border-radius: 4px;
-    }
-
-        .pagination > li {
-            display: inline;
-        }
-
-            .pagination > li:first-child > a, .pagination > li:first-child > span {
-                margin-left: 0;
-                border-top-left-radius: 4px;
-                border-bottom-left-radius: 4px;
-            }
-
-            .pagination > li > a, .pagination > li > span {
-                position: relative;
-                float: left;
-                padding: 6px 12px;
-                margin-left: -1px;
-                line-height: 1.42857143;
-                color: #337ab7;
-                text-decoration: none;
-                background-color: #fff;
-                border: 1px solid #ddd;
-            }
-
-        .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
-            z-index: 3;
-            color: #fff;
-            cursor: default;
-            background-color: #337ab7;
-            border-color: #337ab7;
-        }
-
-        .pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
-            z-index: 2;
-            color: #23527c;
-            background-color: #eee;
-            border-color: #ddd;
-        }
-</style>
 
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
 
-            <h4 class="page-title">Quản lý sản phẩm</h4>
+            <h4 class="page-title">Quản lý đơn hàng</h4>
         </div>
     </div>
 </div>
@@ -79,7 +23,7 @@
 
                 @using (Html.BeginForm("QuanLySanPham", "Admin", FormMethod.Get))
                 {
-                    <div class="form-horizontal">
+                    @*<div class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" for="simpleinput">Tên sản phẩm</label>
                             <div class="col-lg-4">
@@ -126,7 +70,7 @@
                             <div class="col-lg-4">
                                 <select name="TrangThai" class="form-control">
                                     <option value="">--Trạng thái--</option>
-                                    @{ 
+                                    @{
                                         string trangThai = string.IsNullOrEmpty(Request["TrangThai"]) ? "" : Request["TrangThai"];
                                     }
 
@@ -145,7 +89,7 @@
                             <i class="fe-search"></i>
                         </button>
 
-                    </div>
+                    </div>*@
                 }
 
 
@@ -159,79 +103,36 @@
     <thead class="thead-light">
         <tr>
             <th>#</th>
-            <th>Tên Giày</th>
-            <th>Size</th>
-            <th>Giá Bán</th>
-            <th>Số Lượng</th>
-            <th>Ảnh Bìa</th>
-            <th>Trạng Thái</th>
-            <th>Thao Tác</th>
+            <th>Tên Khách Hàng</th>
+            <th>Mã Đơn Hàng</th>
+            <th>Số lượng sản phẩm</th>
+            <th>Tổng tiền</th>
+            <th>Thao tác</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in ViewBag.lstDH)
         {
-            if (item.TrangThai == true)
-            {
+
                 <tr>
                     <th scope="row">@soTT</th>
-                    <td>@item.TenGiay</td>
-                    <td>@item.Size</td>
-                    <td>@Html.FormatValue(item.GiaBan, "{0:#,##0}") VNĐ</td>
-                    <td>@item.SoLuongTon</td>
+                    <td>@item.TenKH</td>
+                    <td>@item.MaDH</td>
+                    <td>@item.SoLuongSP</td>
+                    <td>@item.TongTien</td>
+
                     <td>
-                        <img src="~/Images/@item.AnhBia" style=" width: 100px; height: 80px;" />
-                    </td>
-                    <td>Còn hàng</td>
-                    <td>
-                        <a href="@Url.Action("SuaSanPham", "Admin", new {MaSP = item.MaGiay})" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
+                        <a href="@Url.Action("ChiTietDonHang", "Admin", new {MaDH = item.MaDH})" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
                             <i class="fe-edit-1"></i>
                         </a>
-                        <a href="@Url.Action("XoaSanPham", "Admin", new {MaSP = @item.MaGiay})" class="btn btn-danger btn-sm" title="Xóa sản phẩm">
-                            <i class="fe-trash-2"></i>
-                        </a>
-                    </td>
-                </tr>
-            }
-            else
-            {
-                <tr>
-                    <th scope="row">@soTT</th>
-                    <td>@item.TenGiay</td>
-                    <td>@item.Size</td>
-                    <td>@Html.FormatValue(item.GiaBan, "{0:#,##0}") VNĐ</td>
-                    <td>@item.SoLuongTon</td>
-                    <td>
-                        <img src="~/Images/@item.AnhBia" style=" width: 100px; height: 80px;" />
-                    </td>
-                    <td>Hết hàng</td>
-                    <td>
-                        <a href="@Url.Action("SuaSanPham", "Admin", new {MaSP = item.MaGiay})" class="btn btn-primary btn-sm" title="Sửa sản phẩm">
-                            <i class="fe-edit-1"></i>
-                        </a>
-                        <a href="@Url.Action("HienSanPham", "Admin", new {MaSP = item.MaGiay})" class="btn btn-success btn-sm" title="Xóa sản phẩm">
+                        @*<a href="@Url.Action("HienSanPham", "Admin", new {MaSP = item.MaGiay})" class="btn btn-success btn-sm" title="Xóa sản phẩm">
                             <i class="fa-solid fa-recycle"></i>
-                        </a>
+                        </a>*@
                     </td>
                 </tr>
-            }
-
-
             soTT++;
         }
 
     </tbody>
 </table>
-
-<div>Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) / @Model.PageCount</div>
-<div class="MenuTrang">
-    @Html.PagedListPager(Model, page => Url.Action("QuanLySanPham", new
-    {
-        page = page,
-        TenSP = Request["TenSP"],
-        MaTT = MaTT,
-        GiaTu = Request["GiaTu"],
-        GiaDen = Request["GiaDen"]
-    }))
-</div>
 

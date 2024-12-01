@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "ThemKhuyenMai";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+
+            <h4 class="page-title">Quản lý Khuyến Mãi</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Thêm Mã Khuyến Mãi</h4>
+                <br>
+
+                @using (Html.BeginForm("ThemVoucher", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Tên Mã Khuyến Mãi</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="TenKM">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Phần Trăm Giảm</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="PhanTramGiam" placeholder="ví dụ: 20%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Ngày Bắt Đầu</label>
+                            <div class="col-lg-10">
+                                <input type="date" class="form-control" name="NgayBatDau">
+                               
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="simpleinput">Ngày Kết Thúc</label>
+                            <div class="col-lg-10">
+                                <input type="date" class="form-control" name="NgayKetThuc">
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-3" style="margin-left: 80px;">
+                                <button type="submit" class="btn btn-primary">Thêm khuyến mãi</button>
+                            </div>
+                            <div class="col-lg-3" style="margin-left: -100px;">
+                                <a href="@Url.Action("QuanLyVoucher", "Admin")" class="btn btn-primary">Hủy thao tác</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+            </div> <!-- end card-box -->
+        </div> <!-- end card-->
+    </div><!-- end col -->
+</div>
+

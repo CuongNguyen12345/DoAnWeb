@@ -141,14 +141,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BINHLUAN.cs">
+      <DependentUpon>ShopGiay.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CT_DONHANG.cs">
       <DependentUpon>ShopGiay.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DoanhThu.cs" />
     <Compile Include="Models\DONHANG.cs">
       <DependentUpon>ShopGiay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\KHACHHANG.cs">
+      <DependentUpon>ShopGiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KHUYENMAI.cs">
       <DependentUpon>ShopGiay.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LOAIGIAY.cs">
@@ -187,10 +194,14 @@
     <Compile Include="Models\THUONGHIEU.cs">
       <DependentUpon>ShopGiay.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewBagModel.cs" />
     <Compile Include="Models\YKIENKHACHHANG.cs">
       <DependentUpon>ShopGiay.tt</DependentUpon>
     </Compile>
+    <Compile Include="PayCompare.cs" />
+    <Compile Include="PayLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -300,8 +311,8 @@
     <Content Include="Images\Screenshot 2024-11-28 221911.png" />
     <Content Include="Models\ShopGiay.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ShopGiay.Context.cs</LastGenOutput>
       <DependentUpon>ShopGiay.edmx</DependentUpon>
+      <LastGenOutput>ShopGiay.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ShopGiay.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -318,13 +329,6 @@
     <Content Include="Content\icon\fontawesome-free-6.3.0-web\webfonts\fa-regular-400.ttf" />
     <Content Include="Content\icon\fontawesome-free-6.3.0-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\icon\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.ttf" />
-    <EntityDeploy Include="Models\ShopGiay.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ShopGiay.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ShopGiay.edmx.diagram">
-      <DependentUpon>ShopGiay.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\fonts\dripicons-v2-1.bin" />
     <Content Include="Content\fonts\dripicons-v2-2.bin" />
     <Content Include="Content\fonts\dripicons-v2-3.bin" />
@@ -341,6 +345,13 @@
     <Content Include="Content\fonts\summernote-2.bin" />
     <Content Include="Content\fonts\summernote-3.bin" />
     <Content Include="Content\fonts\summernote.bin" />
+    <EntityDeploy Include="Models\ShopGiay.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ShopGiay.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ShopGiay.edmx.diagram">
+      <DependentUpon>ShopGiay.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -396,6 +407,10 @@
     <Content Include="Views\User\ThuongHieu.cshtml" />
     <Content Include="Views\Admin\ThemSanPham.cshtml" />
     <Content Include="Views\Admin\SuaSanPham.cshtml" />
+    <Content Include="Views\Admin\QuanLyVoucher.cshtml" />
+    <Content Include="Views\Admin\ThemVoucher.cshtml" />
+    <Content Include="Views\User\ThemBinhLuan.cshtml" />
+    <Content Include="Views\Admin\QuanLyDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

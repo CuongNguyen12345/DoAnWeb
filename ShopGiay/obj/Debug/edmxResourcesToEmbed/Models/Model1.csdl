@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ShopGiayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BINHLUAN">
+    <Key>
+      <PropertyRef Name="MaBL" />
+    </Key>
+    <Property Name="MaBL" Type="Int32" Nullable="false" />
+    <Property Name="MaKH" Type="Int32" Nullable="false" />
+    <Property Name="TenKH" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaSP" Type="Int32" Nullable="false" />
+    <Property Name="BinhLuan1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgayBinhLuan" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="KHACHHANG" Relationship="Self.FK__BINHLUAN__MaKH__09A971A2" FromRole="BINHLUAN" ToRole="KHACHHANG" />
+    <NavigationProperty Name="SANPHAM" Relationship="Self.FK__BINHLUAN__MaSP__08B54D69" FromRole="BINHLUAN" ToRole="SANPHAM" />
+  </EntityType>
   <EntityType Name="CT_DONHANG">
     <Key>
       <PropertyRef Name="MaDonHang" />
@@ -39,8 +52,8 @@
     <Property Name="DienThoaiKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="NgaySinh" Type="DateTime" Precision="3" />
     <Property Name="TrangThai" Type="Boolean" />
+    <NavigationProperty Name="BINHLUANs" Relationship="Self.FK__BINHLUAN__MaKH__09A971A2" FromRole="KHACHHANG" ToRole="BINHLUAN" />
     <NavigationProperty Name="DONHANGs" Relationship="Self.FK_KHACHHANG_2" FromRole="KHACHHANG" ToRole="DONHANG" />
-    <NavigationProperty Name="BINHLUANs" Relationship="ShopGiayModel.FK__BINHLUAN__MaKH__0E6E26BF" FromRole="KHACHHANG" ToRole="BINHLUAN" />
   </EntityType>
   <EntityType Name="KHUYENMAI">
     <Key>
@@ -48,7 +61,7 @@
     </Key>
     <Property Name="MaKM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TenKM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="PhanTramGiam" Type="Double" />
+    <Property Name="PhanTramGiam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
     <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
     <Property Name="TrangThai" Type="Int32" />
@@ -120,11 +133,11 @@
     <Property Name="ThoiGianBaoHanh" Type="Int32" />
     <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
     <Property Name="SoLuongTon" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BINHLUANs" Relationship="Self.FK__BINHLUAN__MaSP__08B54D69" FromRole="SANPHAM" ToRole="BINHLUAN" />
     <NavigationProperty Name="CT_DONHANG" Relationship="Self.FK_SANPHAM_2" FromRole="SANPHAM" ToRole="CT_DONHANG" />
     <NavigationProperty Name="LOAIGIAY" Relationship="Self.FK_LOAIGIAY" FromRole="SANPHAM" ToRole="LOAIGIAY" />
     <NavigationProperty Name="NHACUNGCAP" Relationship="Self.FK_NHACUNGCAP" FromRole="SANPHAM" ToRole="NHACUNGCAP" />
     <NavigationProperty Name="THUONGHIEU" Relationship="Self.FL_THUONGHIEU" FromRole="SANPHAM" ToRole="THUONGHIEU" />
-    <NavigationProperty Name="BINHLUANs" Relationship="ShopGiayModel.FK__BINHLUAN__MaSP__0F624AF8" FromRole="SANPHAM" ToRole="BINHLUAN" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -154,6 +167,30 @@
     <Property Name="NgayGui" Type="DateTime" Precision="0" />
     <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
+  <Association Name="FK__BINHLUAN__MaKH__09A971A2">
+    <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
+    <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHACHHANG">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="BINHLUAN">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BINHLUAN__MaSP__08B54D69">
+    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+    <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SANPHAM">
+        <PropertyRef Name="MaGiay" />
+      </Principal>
+      <Dependent Role="BINHLUAN">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DONHANG">
     <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="1" />
     <End Role="CT_DONHANG" Type="Self.CT_DONHANG" Multiplicity="*" />
@@ -239,6 +276,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ShopGiayEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BINHLUANs" EntityType="Self.BINHLUAN" />
     <EntitySet Name="CT_DONHANG" EntityType="Self.CT_DONHANG" />
     <EntitySet Name="DONHANGs" EntityType="Self.DONHANG" />
     <EntitySet Name="KHACHHANGs" EntityType="Self.KHACHHANG" />
@@ -251,6 +289,14 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="THUONGHIEUx" EntityType="Self.THUONGHIEU" />
     <EntitySet Name="YKIENKHACHHANGs" EntityType="Self.YKIENKHACHHANG" />
+    <AssociationSet Name="FK__BINHLUAN__MaKH__09A971A2" Association="Self.FK__BINHLUAN__MaKH__09A971A2">
+      <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+      <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BINHLUAN__MaSP__08B54D69" Association="Self.FK__BINHLUAN__MaSP__08B54D69">
+      <End Role="SANPHAM" EntitySet="SANPHAMs" />
+      <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+    </AssociationSet>
     <AssociationSet Name="FK_DONHANG" Association="Self.FK_DONHANG">
       <End Role="DONHANG" EntitySet="DONHANGs" />
       <End Role="CT_DONHANG" EntitySet="CT_DONHANG" />
@@ -279,51 +325,17 @@
       <End Role="THUONGHIEU" EntitySet="THUONGHIEUx" />
       <End Role="SANPHAM" EntitySet="SANPHAMs" />
     </AssociationSet>
-    <EntitySet Name="BINHLUANs" EntityType="ShopGiayModel.BINHLUAN" />
-    <AssociationSet Name="FK__BINHLUAN__MaKH__0E6E26BF" Association="ShopGiayModel.FK__BINHLUAN__MaKH__0E6E26BF">
-      <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
-      <End Role="BINHLUAN" EntitySet="BINHLUANs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__BINHLUAN__MaSP__0F624AF8" Association="ShopGiayModel.FK__BINHLUAN__MaSP__0F624AF8">
-      <End Role="SANPHAM" EntitySet="SANPHAMs" />
-      <End Role="BINHLUAN" EntitySet="BINHLUANs" />
-    </AssociationSet>
+    <EntitySet Name="KHUYENMAI1" EntityType="ShopGiayModel.KHUYENMAI1" />
   </EntityContainer>
-  <EntityType Name="BINHLUAN">
+  <EntityType Name="KHUYENMAI1">
     <Key>
-      <PropertyRef Name="MaBL" />
+      <PropertyRef Name="MaKM" />
     </Key>
-    <Property Name="MaBL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaKH" Type="Int32" Nullable="false" />
-    <Property Name="TenKH" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="MaSP" Type="Int32" Nullable="false" />
-    <Property Name="BinhLuan1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="NgayBinhLuan" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="KHACHHANG" Relationship="ShopGiayModel.FK__BINHLUAN__MaKH__0E6E26BF" FromRole="BINHLUAN" ToRole="KHACHHANG" />
-    <NavigationProperty Name="SANPHAM" Relationship="ShopGiayModel.FK__BINHLUAN__MaSP__0F624AF8" FromRole="BINHLUAN" ToRole="SANPHAM" />
+    <Property Name="MaKM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenKM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PhanTramGiam" Type="Double" />
+    <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
+    <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+    <Property Name="TrangThai" Type="Int32" />
   </EntityType>
-  <Association Name="FK__BINHLUAN__MaKH__0E6E26BF">
-    <End Type="ShopGiayModel.KHACHHANG" Role="KHACHHANG" Multiplicity="1" />
-    <End Type="ShopGiayModel.BINHLUAN" Role="BINHLUAN" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KHACHHANG">
-        <PropertyRef Name="MaKH" />
-      </Principal>
-      <Dependent Role="BINHLUAN">
-        <PropertyRef Name="MaKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__BINHLUAN__MaSP__0F624AF8">
-    <End Type="ShopGiayModel.SANPHAM" Role="SANPHAM" Multiplicity="1" />
-    <End Type="ShopGiayModel.BINHLUAN" Role="BINHLUAN" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SANPHAM">
-        <PropertyRef Name="MaGiay" />
-      </Principal>
-      <Dependent Role="BINHLUAN">
-        <PropertyRef Name="MaSP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

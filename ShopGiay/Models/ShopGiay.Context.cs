@@ -28,6 +28,7 @@ namespace ShopGiay.Models
         public virtual DbSet<CT_DONHANG> CT_DONHANG { get; set; }
         public virtual DbSet<DONHANG> DONHANGs { get; set; }
         public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
+        public virtual DbSet<KHUYENMAI> KHUYENMAIs { get; set; }
         public virtual DbSet<LOAIGIAY> LOAIGIAYs { get; set; }
         public virtual DbSet<NHACUNGCAP> NHACUNGCAPs { get; set; }
         public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
@@ -36,5 +37,6 @@ namespace ShopGiay.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<THUONGHIEU> THUONGHIEUx { get; set; }
         public virtual DbSet<YKIENKHACHHANG> YKIENKHACHHANGs { get; set; }
+        public virtual DbSet<BINHLUAN> BINHLUANs { get; set; }
     }
 }

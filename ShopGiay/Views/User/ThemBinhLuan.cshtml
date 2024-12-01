@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ShopGiay.Models.BINHLUAN>
+
+@{ 
+    int maGiay = ViewBag.MaGiay;
+}
+
+<div class="comments-section">
+    <h3>Bình luận</h3>
+
+    @if (Session["Taikhoan"] != null)
+    {
+        using (Html.BeginForm("ThemBinhLuan", "User", FormMethod.Post))
+        {
+            <div class="comment-form">
+                @*@Html.Hidden("maSP", maGiay)*@
+
+                <input type="hidden" value="@maGiay" name="maSP" />
+                <textarea name="binhLuan" class="comment-input" rows="3"
+                          placeholder="Viết bình luận của bạn..." required></textarea>
+                <button type="submit" class="add-to-cart">Gửi bình luận</button>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Vui lòng <a href="@Url.Action("DangNhap", "User")">đăng nhập</a> để bình luận.</p>
+    }
+
+    <div class="comment-list">
+        @foreach (var bl in Model)
+        {
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-author">@bl.TenKH</span>
+                    <span class="comment-date">@bl.NgayBinhLuan.ToString("dd/MM/yyyy HH:mm")</span>
+                </div>
+                <div class="comment-content">
+                    @bl.BinhLuan1
+                </div>
+            </div>
+        }
+    </div>
+</div>

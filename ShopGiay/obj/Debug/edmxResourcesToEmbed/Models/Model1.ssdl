@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="MaBL" />
     </Key>
-    <Property Name="MaBL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaBL" Type="int" Nullable="false" />
     <Property Name="MaKH" Type="int" Nullable="false" />
     <Property Name="TenKH" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="MaSP" Type="int" Nullable="false" />
@@ -149,7 +149,7 @@
     <Property Name="NgayGui" Type="date" />
     <Property Name="NoiDung" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <Association Name="FK__BINHLUAN__MaKH__0E6E26BF">
+  <Association Name="FK__BINHLUAN__MaKH__09A971A2">
     <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
     <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
     <ReferentialConstraint>
@@ -161,7 +161,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BINHLUAN__MaSP__0F624AF8">
+  <Association Name="FK__BINHLUAN__MaSP__08B54D69">
     <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
     <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
     <ReferentialConstraint>
@@ -271,11 +271,11 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="THUONGHIEU" EntityType="Self.THUONGHIEU" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="YKIENKHACHHANG" EntityType="Self.YKIENKHACHHANG" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__BINHLUAN__MaKH__0E6E26BF" Association="Self.FK__BINHLUAN__MaKH__0E6E26BF">
+    <AssociationSet Name="FK__BINHLUAN__MaKH__09A971A2" Association="Self.FK__BINHLUAN__MaKH__09A971A2">
       <End Role="KHACHHANG" EntitySet="KHACHHANG" />
       <End Role="BINHLUAN" EntitySet="BINHLUAN" />
     </AssociationSet>
-    <AssociationSet Name="FK__BINHLUAN__MaSP__0F624AF8" Association="Self.FK__BINHLUAN__MaSP__0F624AF8">
+    <AssociationSet Name="FK__BINHLUAN__MaSP__08B54D69" Association="Self.FK__BINHLUAN__MaSP__08B54D69">
       <End Role="SANPHAM" EntitySet="SANPHAM" />
       <End Role="BINHLUAN" EntitySet="BINHLUAN" />
     </AssociationSet>

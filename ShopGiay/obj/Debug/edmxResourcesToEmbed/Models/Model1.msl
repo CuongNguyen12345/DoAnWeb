@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ShopGiayModelStoreContainer" CdmEntityContainer="ShopGiayEntities">
+    <EntitySetMapping Name="BINHLUANs">
+      <EntityTypeMapping TypeName="ShopGiayModel.BINHLUAN">
+        <MappingFragment StoreEntitySet="BINHLUAN">
+          <ScalarProperty Name="MaBL" ColumnName="MaBL" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="BinhLuan1" ColumnName="BinhLuan" />
+          <ScalarProperty Name="NgayBinhLuan" ColumnName="NgayBinhLuan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CT_DONHANG">
       <EntityTypeMapping TypeName="ShopGiayModel.CT_DONHANG">
         <MappingFragment StoreEntitySet="CT_DONHANG">
@@ -35,18 +47,6 @@
           <ScalarProperty Name="DiaChiKH" ColumnName="DiaChiKH" />
           <ScalarProperty Name="DienThoaiKH" ColumnName="DienThoaiKH" />
           <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="KHUYENMAIs">
-      <EntityTypeMapping TypeName="ShopGiayModel.KHUYENMAI">
-        <MappingFragment StoreEntitySet="KHUYENMAI">
-          <ScalarProperty Name="MaKM" ColumnName="MaKM" />
-          <ScalarProperty Name="TenKM" ColumnName="TenKM" />
-          <ScalarProperty Name="PhanTramGiam" ColumnName="PhanTramGiam" />
-          <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
-          <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -150,15 +150,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BINHLUANs">
-      <EntityTypeMapping TypeName="ShopGiayModel.BINHLUAN">
-        <MappingFragment StoreEntitySet="BINHLUAN">
-          <ScalarProperty Name="NgayBinhLuan" ColumnName="NgayBinhLuan" />
-          <ScalarProperty Name="BinhLuan1" ColumnName="BinhLuan" />
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-          <ScalarProperty Name="MaBL" ColumnName="MaBL" />
+    <EntitySetMapping Name="KHUYENMAI1">
+      <EntityTypeMapping TypeName="ShopGiayModel.KHUYENMAI1">
+        <MappingFragment StoreEntitySet="KHUYENMAI">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+          <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+          <ScalarProperty Name="PhanTramGiam" ColumnName="PhanTramGiam" />
+          <ScalarProperty Name="TenKM" ColumnName="TenKM" />
+          <ScalarProperty Name="MaKM" ColumnName="MaKM" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
