@@ -1,0 +1,137 @@
+﻿@model IEnumerable<ShopGiay.Models.TINNHAN>
+@{
+    ViewBag.Title = "ChatDetail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        Hội thoại với khách hàng: @ViewBag.KhachHang.HoTen
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="chat-messages" class="chat-messages" style="height: 400px; overflow-y: auto;">
+                        @foreach (var message in Model)
+                        {
+                            <div class="message @(message.MaQL.HasValue ? "admin" : "user")">
+                                <div class="message-content">
+                                    @message.NoiDung
+                                </div>
+                                <div class="message-time">
+                                    @message.ThoiGianGui.ToString("HH:mm")
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="chat-input mt-3">
+                        <div class="input-group">
+                            <input type="text" id="message-input" onclick="sendMessage()" class="form-control" placeholder="Nhập tin nhắn..." />
+                            <div class="input-group-append">
+                                <button id="send-message" class="btn btn-primary">Gửi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .chat-messages {
+        padding: 15px;
+    }
+
+    .message {
+        margin: 10px 0;
+        max-width: 70%;
+        clear: both;
+    }
+
+        .message.user {
+            float: left;
+        }
+
+        .message.admin {
+            float: right;
+        }
+
+    .message-content {
+        padding: 10px 15px;
+        border-radius: 15px;
+        background: #f1f1f1;
+        display: inline-block;
+    }
+
+    .message.admin .message-content {
+        background: #007bff;
+        color: white;
+    }
+
+    .message-time {
+        font-size: 0.8em;
+        color: #666;
+        margin-top: 5px;
+        text-align: right;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var chatMessages = $("#chat-messages");
+            var maKH = @ViewBag.KhachHang.MaKH;
+
+            function scrollToBottom() {
+                chatMessages.scrollTop(chatMessages[0].scrollHeight);
+            }
+
+            $("#send-message").click(sendMessage);
+
+            $("#message-input").keypress(function(e) {
+                if (e.which == 13) {
+                    sendMessage();
+                }
+});
+
+            function sendMessage() {
+                var messageInput = $("#message-input");
+                var message = messageInput.val().trim();
+
+                if (message) {
+                    $.ajax({
+                        url: '@Url.Action("TraLoiTinNhan")',
+                        type: 'POST',
+                        data: { maKH: maKH, noiDung: message },
+                        success: function(response) {
+                            if (response.success) {
+                                messageInput.val('');
+                                appendMessage(message);
+                                scrollToBottom();
+                            } else {
+                                alert('Có lỗi xảy ra: ' + response.message);
+                            }
+                        },
+                        error: function() {
+                            alert('Có lỗi xảy ra khi gửi tin nhắn');
+                        }
+                    });
+                }
+            }
+
+            function appendMessage(content) {
+                var messageHtml =
+                    '<div class="message admin">' +
+                    '<div class="message-content">' + content + '</div>' +
+                    '<div class="message-time">' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + '</div>' +
+                    '</div>';
+                chatMessages.append(messageHtml);
+            }
+
+            scrollToBottom();
+        });
+</script>

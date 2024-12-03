@@ -12,19 +12,24 @@
 </head>
 <body>
 
-     @Html.Action("Header", "User")
+    @Html.Action("Header", "User")
 
 
-     <main>
+    <main>
 
-         @RenderSection("slider", false)
+        @RenderSection("slider", false)
 
-         @RenderBody()
+        @RenderBody()
 
-         <script src="~/Scripts/js/main.js"></script>
-     </main>
+        <script src="~/Scripts/js/main.js"></script>
+    </main>
 
-
+    @{
+        if (Session["Taikhoan"] != null)
+        {
+            @Html.Action("ChatBox", "CHAT")
+        }
+    }
 
     @Html.Action("Footer", "User")
 </body>

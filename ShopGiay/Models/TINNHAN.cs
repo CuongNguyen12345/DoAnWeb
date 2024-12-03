@@ -12,12 +12,16 @@ namespace ShopGiay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class TINNHAN
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int MaTinNhan { get; set; }
+        public Nullable<int> MaKH { get; set; }
+        public Nullable<int> MaQL { get; set; }
+        public string NoiDung { get; set; }
+        public System.DateTime ThoiGianGui { get; set; }
+        public bool DaDoc { get; set; }
+    
+        public virtual KHACHHANG KHACHHANG { get; set; }
+        public virtual QUANLY QUANLY { get; set; }
     }
 }

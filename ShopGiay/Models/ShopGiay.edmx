@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ShopGiayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ShopGiayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BINHLUAN">
           <Key>
             <PropertyRef Name="MaBL" />
@@ -26,6 +26,7 @@
           <Property Name="GiaLucBan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DonGia" Type="money" />
         </EntityType>
         <EntityType Name="DONHANG">
           <Key>
@@ -37,6 +38,7 @@
           <Property Name="NgayGiao" Type="datetime" />
           <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
           <Property Name="MaKH" Type="int" />
+          <Property Name="DaThanhToan" Type="int" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -117,7 +119,7 @@
           <Property Name="MaGiay" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenGiay" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Size" Type="tinyint" Nullable="false" />
-          <Property Name="AnhBia" Type="varchar" MaxLength="255" />
+          <Property Name="AnhBia" Type="varchar" MaxLength="50" />
           <Property Name="GiaBan" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="MaThuongHieu" Type="int" />
           <Property Name="TrangThai" Type="bit" />
@@ -127,22 +129,23 @@
           <Property Name="NgayCapNhat" Type="datetime" />
           <Property Name="SoLuongTon" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="THUONGHIEU">
           <Key>
             <PropertyRef Name="MaThuongHieu" />
           </Key>
           <Property Name="MaThuongHieu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenThuongHieu" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TINNHAN">
+          <Key>
+            <PropertyRef Name="MaTinNhan" />
+          </Key>
+          <Property Name="MaTinNhan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaKH" Type="int" />
+          <Property Name="MaQL" Type="int" />
+          <Property Name="NoiDung" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ThoiGianGui" Type="datetime" Nullable="false" />
+          <Property Name="DaDoc" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="YKIENKHACHHANG">
           <Key>
@@ -154,7 +157,7 @@
           <Property Name="NgayGui" Type="date" />
           <Property Name="NoiDung" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <Association Name="FK__BINHLUAN__MaKH__0E6E26BF">
+        <Association Name="FK__BINHLUAN__MaKH__59FA5E80">
           <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
           <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,7 +169,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BINHLUAN__MaSP__0F624AF8">
+        <Association Name="FK__BINHLUAN__MaSP__5AEE82B9">
           <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
           <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -175,6 +178,30 @@
             </Principal>
             <Dependent Role="BINHLUAN">
               <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TINNHAN__MaKH__628FA481">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+          <End Role="TINNHAN" Type="Self.TINNHAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="TINNHAN">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TINNHAN__MaQL__6383C8BA">
+          <End Role="QUANLY" Type="Self.QUANLY" Multiplicity="0..1" />
+          <End Role="TINNHAN" Type="Self.TINNHAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUANLY">
+              <PropertyRef Name="MaQL" />
+            </Principal>
+            <Dependent Role="TINNHAN">
+              <PropertyRef Name="MaQL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,16 +300,24 @@
           <EntitySet Name="PHANQUYEN" EntityType="Self.PHANQUYEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QUANLY" EntityType="Self.QUANLY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THUONGHIEU" EntityType="Self.THUONGHIEU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TINNHAN" EntityType="Self.TINNHAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="YKIENKHACHHANG" EntityType="Self.YKIENKHACHHANG" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BINHLUAN__MaKH__0E6E26BF" Association="Self.FK__BINHLUAN__MaKH__0E6E26BF">
+          <AssociationSet Name="FK__BINHLUAN__MaKH__59FA5E80" Association="Self.FK__BINHLUAN__MaKH__59FA5E80">
             <End Role="KHACHHANG" EntitySet="KHACHHANG" />
             <End Role="BINHLUAN" EntitySet="BINHLUAN" />
           </AssociationSet>
-          <AssociationSet Name="FK__BINHLUAN__MaSP__0F624AF8" Association="Self.FK__BINHLUAN__MaSP__0F624AF8">
+          <AssociationSet Name="FK__BINHLUAN__MaSP__5AEE82B9" Association="Self.FK__BINHLUAN__MaSP__5AEE82B9">
             <End Role="SANPHAM" EntitySet="SANPHAM" />
             <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TINNHAN__MaKH__628FA481" Association="Self.FK__TINNHAN__MaKH__628FA481">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+            <End Role="TINNHAN" EntitySet="TINNHAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TINNHAN__MaQL__6383C8BA" Association="Self.FK__TINNHAN__MaQL__6383C8BA">
+            <End Role="QUANLY" EntitySet="QUANLY" />
+            <End Role="TINNHAN" EntitySet="TINNHAN" />
           </AssociationSet>
           <AssociationSet Name="FK_DONHANG" Association="Self.FK_DONHANG">
             <End Role="DONHANG" EntitySet="DONHANG" />
@@ -313,10 +348,24 @@
             <End Role="SANPHAM" EntitySet="SANPHAM" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShopGiayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BINHLUAN">
+          <Key>
+            <PropertyRef Name="MaBL" />
+          </Key>
+          <Property Name="MaBL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKH" Type="Int32" Nullable="false" />
+          <Property Name="TenKH" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaSP" Type="Int32" Nullable="false" />
+          <Property Name="BinhLuan1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgayBinhLuan" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="KHACHHANG" Relationship="Self.FK__BINHLUAN__MaKH__59FA5E80" FromRole="BINHLUAN" ToRole="KHACHHANG" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.FK__BINHLUAN__MaSP__5AEE82B9" FromRole="BINHLUAN" ToRole="SANPHAM" />
+        </EntityType>
         <EntityType Name="CT_DONHANG">
           <Key>
             <PropertyRef Name="MaDonHang" />
@@ -327,6 +376,7 @@
           <Property Name="GiaLucBan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DonGia" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="DONHANG" Relationship="Self.FK_DONHANG" FromRole="CT_DONHANG" ToRole="DONHANG" />
           <NavigationProperty Name="SANPHAM" Relationship="Self.FK_SANPHAM_2" FromRole="CT_DONHANG" ToRole="SANPHAM" />
         </EntityType>
@@ -340,6 +390,7 @@
           <Property Name="NgayGiao" Type="DateTime" Precision="3" />
           <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="MaKH" Type="Int32" />
+          <Property Name="DaThanhToan" Type="Int32" />
           <NavigationProperty Name="CT_DONHANG" Relationship="Self.FK_DONHANG" FromRole="DONHANG" ToRole="CT_DONHANG" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_KHACHHANG_2" FromRole="DONHANG" ToRole="KHACHHANG" />
         </EntityType>
@@ -356,8 +407,9 @@
           <Property Name="DienThoaiKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NgaySinh" Type="DateTime" Precision="3" />
           <Property Name="TrangThai" Type="Boolean" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK__BINHLUAN__MaKH__59FA5E80" FromRole="KHACHHANG" ToRole="BINHLUAN" />
           <NavigationProperty Name="DONHANGs" Relationship="Self.FK_KHACHHANG_2" FromRole="KHACHHANG" ToRole="DONHANG" />
-          <NavigationProperty Name="BINHLUANs" Relationship="ShopGiayModel.FK__BINHLUAN__MaKH__0E6E26BF" FromRole="KHACHHANG" ToRole="BINHLUAN" />
+          <NavigationProperty Name="TINNHANs" Relationship="Self.FK__TINNHAN__MaKH__628FA481" FromRole="KHACHHANG" ToRole="TINNHAN" />
         </EntityType>
         <EntityType Name="KHUYENMAI">
           <Key>
@@ -420,6 +472,7 @@
           <Property Name="TrangThai" Type="Boolean" />
           <Property Name="Avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PHANQUYENs" Relationship="Self.FK_PHANQUYEN_QUANLY" FromRole="QUANLY" ToRole="PHANQUYEN" />
+          <NavigationProperty Name="TINNHANs" Relationship="Self.FK__TINNHAN__MaQL__6383C8BA" FromRole="QUANLY" ToRole="TINNHAN" />
         </EntityType>
         <EntityType Name="SANPHAM">
           <Key>
@@ -428,7 +481,7 @@
           <Property Name="MaGiay" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenGiay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Size" Type="Byte" Nullable="false" />
-          <Property Name="AnhBia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AnhBia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GiaBan" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="MaThuongHieu" Type="Int32" />
           <Property Name="TrangThai" Type="Boolean" />
@@ -437,21 +490,11 @@
           <Property Name="ThoiGianBaoHanh" Type="Int32" />
           <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
           <Property Name="SoLuongTon" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK__BINHLUAN__MaSP__5AEE82B9" FromRole="SANPHAM" ToRole="BINHLUAN" />
           <NavigationProperty Name="CT_DONHANG" Relationship="Self.FK_SANPHAM_2" FromRole="SANPHAM" ToRole="CT_DONHANG" />
           <NavigationProperty Name="LOAIGIAY" Relationship="Self.FK_LOAIGIAY" FromRole="SANPHAM" ToRole="LOAIGIAY" />
           <NavigationProperty Name="NHACUNGCAP" Relationship="Self.FK_NHACUNGCAP" FromRole="SANPHAM" ToRole="NHACUNGCAP" />
           <NavigationProperty Name="THUONGHIEU" Relationship="Self.FL_THUONGHIEU" FromRole="SANPHAM" ToRole="THUONGHIEU" />
-          <NavigationProperty Name="BINHLUANs" Relationship="ShopGiayModel.FK__BINHLUAN__MaSP__0F624AF8" FromRole="SANPHAM" ToRole="BINHLUAN" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="THUONGHIEU">
           <Key>
@@ -460,6 +503,19 @@
           <Property Name="MaThuongHieu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenThuongHieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="SANPHAMs" Relationship="Self.FL_THUONGHIEU" FromRole="THUONGHIEU" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="TINNHAN">
+          <Key>
+            <PropertyRef Name="MaTinNhan" />
+          </Key>
+          <Property Name="MaTinNhan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKH" Type="Int32" />
+          <Property Name="MaQL" Type="Int32" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThoiGianGui" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DaDoc" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KHACHHANG" Relationship="Self.FK__TINNHAN__MaKH__628FA481" FromRole="TINNHAN" ToRole="KHACHHANG" />
+          <NavigationProperty Name="QUANLY" Relationship="Self.FK__TINNHAN__MaQL__6383C8BA" FromRole="TINNHAN" ToRole="QUANLY" />
         </EntityType>
         <EntityType Name="YKIENKHACHHANG">
           <Key>
@@ -471,6 +527,30 @@
           <Property Name="NgayGui" Type="DateTime" Precision="0" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
+        <Association Name="FK__BINHLUAN__MaKH__59FA5E80">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BINHLUAN__MaSP__5AEE82B9">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MaGiay" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DONHANG">
           <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="1" />
           <End Role="CT_DONHANG" Type="Self.CT_DONHANG" Multiplicity="*" />
@@ -503,6 +583,18 @@
               <PropertyRef Name="MaKH" />
             </Principal>
             <Dependent Role="DONHANG">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TINNHAN__MaKH__628FA481">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+          <End Role="TINNHAN" Type="Self.TINNHAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="TINNHAN">
               <PropertyRef Name="MaKH" />
             </Dependent>
           </ReferentialConstraint>
@@ -543,6 +635,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TINNHAN__MaQL__6383C8BA">
+          <End Role="QUANLY" Type="Self.QUANLY" Multiplicity="0..1" />
+          <End Role="TINNHAN" Type="Self.TINNHAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUANLY">
+              <PropertyRef Name="MaQL" />
+            </Principal>
+            <Dependent Role="TINNHAN">
+              <PropertyRef Name="MaQL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FL_THUONGHIEU">
           <End Role="THUONGHIEU" Type="Self.THUONGHIEU" Multiplicity="0..1" />
           <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
@@ -556,6 +660,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ShopGiayEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BINHLUANs" EntityType="Self.BINHLUAN" />
           <EntitySet Name="CT_DONHANG" EntityType="Self.CT_DONHANG" />
           <EntitySet Name="DONHANGs" EntityType="Self.DONHANG" />
           <EntitySet Name="KHACHHANGs" EntityType="Self.KHACHHANG" />
@@ -565,9 +670,17 @@
           <EntitySet Name="PHANQUYENs" EntityType="Self.PHANQUYEN" />
           <EntitySet Name="QUANLies" EntityType="Self.QUANLY" />
           <EntitySet Name="SANPHAMs" EntityType="Self.SANPHAM" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="THUONGHIEUx" EntityType="Self.THUONGHIEU" />
+          <EntitySet Name="TINNHANs" EntityType="Self.TINNHAN" />
           <EntitySet Name="YKIENKHACHHANGs" EntityType="Self.YKIENKHACHHANG" />
+          <AssociationSet Name="FK__BINHLUAN__MaKH__59FA5E80" Association="Self.FK__BINHLUAN__MaKH__59FA5E80">
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BINHLUAN__MaSP__5AEE82B9" Association="Self.FK__BINHLUAN__MaSP__5AEE82B9">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+          </AssociationSet>
           <AssociationSet Name="FK_DONHANG" Association="Self.FK_DONHANG">
             <End Role="DONHANG" EntitySet="DONHANGs" />
             <End Role="CT_DONHANG" EntitySet="CT_DONHANG" />
@@ -579,6 +692,10 @@
           <AssociationSet Name="FK_KHACHHANG_2" Association="Self.FK_KHACHHANG_2">
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
             <End Role="DONHANG" EntitySet="DONHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TINNHAN__MaKH__628FA481" Association="Self.FK__TINNHAN__MaKH__628FA481">
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+            <End Role="TINNHAN" EntitySet="TINNHANs" />
           </AssociationSet>
           <AssociationSet Name="FK_LOAIGIAY" Association="Self.FK_LOAIGIAY">
             <End Role="LOAIGIAY" EntitySet="LOAIGIAYs" />
@@ -592,63 +709,33 @@
             <End Role="QUANLY" EntitySet="QUANLies" />
             <End Role="PHANQUYEN" EntitySet="PHANQUYENs" />
           </AssociationSet>
+          <AssociationSet Name="FK__TINNHAN__MaQL__6383C8BA" Association="Self.FK__TINNHAN__MaQL__6383C8BA">
+            <End Role="QUANLY" EntitySet="QUANLies" />
+            <End Role="TINNHAN" EntitySet="TINNHANs" />
+          </AssociationSet>
           <AssociationSet Name="FL_THUONGHIEU" Association="Self.FL_THUONGHIEU">
             <End Role="THUONGHIEU" EntitySet="THUONGHIEUx" />
             <End Role="SANPHAM" EntitySet="SANPHAMs" />
           </AssociationSet>
-          <EntitySet Name="BINHLUANs" EntityType="ShopGiayModel.BINHLUAN" />
-          <AssociationSet Name="FK__BINHLUAN__MaKH__0E6E26BF" Association="ShopGiayModel.FK__BINHLUAN__MaKH__0E6E26BF">
-            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
-            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BINHLUAN__MaSP__0F624AF8" Association="ShopGiayModel.FK__BINHLUAN__MaSP__0F624AF8">
-            <End Role="SANPHAM" EntitySet="SANPHAMs" />
-            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="BINHLUAN">
-          <Key>
-            <PropertyRef Name="MaBL" />
-          </Key>
-          <Property Name="MaBL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaKH" Type="Int32" Nullable="false" />
-          <Property Name="TenKH" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MaSP" Type="Int32" Nullable="false" />
-          <Property Name="BinhLuan1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="NgayBinhLuan" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="KHACHHANG" Relationship="ShopGiayModel.FK__BINHLUAN__MaKH__0E6E26BF" FromRole="BINHLUAN" ToRole="KHACHHANG" />
-          <NavigationProperty Name="SANPHAM" Relationship="ShopGiayModel.FK__BINHLUAN__MaSP__0F624AF8" FromRole="BINHLUAN" ToRole="SANPHAM" />
-        </EntityType>
-        <Association Name="FK__BINHLUAN__MaKH__0E6E26BF">
-          <End Type="ShopGiayModel.KHACHHANG" Role="KHACHHANG" Multiplicity="1" />
-          <End Type="ShopGiayModel.BINHLUAN" Role="BINHLUAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KHACHHANG">
-              <PropertyRef Name="MaKH" />
-            </Principal>
-            <Dependent Role="BINHLUAN">
-              <PropertyRef Name="MaKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__BINHLUAN__MaSP__0F624AF8">
-          <End Type="ShopGiayModel.SANPHAM" Role="SANPHAM" Multiplicity="1" />
-          <End Type="ShopGiayModel.BINHLUAN" Role="BINHLUAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SANPHAM">
-              <PropertyRef Name="MaGiay" />
-            </Principal>
-            <Dependent Role="BINHLUAN">
-              <PropertyRef Name="MaSP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ShopGiayModelStoreContainer" CdmEntityContainer="ShopGiayEntities">
+          <EntitySetMapping Name="BINHLUANs">
+            <EntityTypeMapping TypeName="ShopGiayModel.BINHLUAN">
+              <MappingFragment StoreEntitySet="BINHLUAN">
+                <ScalarProperty Name="MaBL" ColumnName="MaBL" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="BinhLuan1" ColumnName="BinhLuan" />
+                <ScalarProperty Name="NgayBinhLuan" ColumnName="NgayBinhLuan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CT_DONHANG">
             <EntityTypeMapping TypeName="ShopGiayModel.CT_DONHANG">
               <MappingFragment StoreEntitySet="CT_DONHANG">
@@ -657,6 +744,7 @@
                 <ScalarProperty Name="GiaLucBan" ColumnName="GiaLucBan" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -669,6 +757,7 @@
                 <ScalarProperty Name="NgayGiao" ColumnName="NgayGiao" />
                 <ScalarProperty Name="TongTien" ColumnName="TongTien" />
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -768,22 +857,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ShopGiayModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="THUONGHIEUx">
             <EntityTypeMapping TypeName="ShopGiayModel.THUONGHIEU">
               <MappingFragment StoreEntitySet="THUONGHIEU">
                 <ScalarProperty Name="MaThuongHieu" ColumnName="MaThuongHieu" />
                 <ScalarProperty Name="TenThuongHieu" ColumnName="TenThuongHieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TINNHANs">
+            <EntityTypeMapping TypeName="ShopGiayModel.TINNHAN">
+              <MappingFragment StoreEntitySet="TINNHAN">
+                <ScalarProperty Name="MaTinNhan" ColumnName="MaTinNhan" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaQL" ColumnName="MaQL" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="ThoiGianGui" ColumnName="ThoiGianGui" />
+                <ScalarProperty Name="DaDoc" ColumnName="DaDoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -795,18 +885,6 @@
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="NgayGui" ColumnName="NgayGui" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BINHLUANs">
-            <EntityTypeMapping TypeName="ShopGiayModel.BINHLUAN">
-              <MappingFragment StoreEntitySet="BINHLUAN">
-                <ScalarProperty Name="NgayBinhLuan" ColumnName="NgayBinhLuan" />
-                <ScalarProperty Name="BinhLuan1" ColumnName="BinhLuan" />
-                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-                <ScalarProperty Name="MaBL" ColumnName="MaBL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

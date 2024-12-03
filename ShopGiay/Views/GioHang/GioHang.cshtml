@@ -7,111 +7,286 @@
 <div class="container py-5">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-primary text-white">
-            <h2 class="text-center mb-0" style="color: #fff;">THÔNG TIN GIỎ HÀNG</h2>
+            <h2 class="text-center mb-0">THÔNG TIN GIỎ HÀNG</h2>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Mã Giày</th>
-                            <th>Tên Giày</th>
-                            <th>Hình Ảnh</th>
-                            <th>Số Lượng</th>
-                            <th>Đơn Giá</th>
-                            <th>Thành Tiền</th>
-                            <th>Thao Tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.iMaGiay</td>
-                                <td>@item.sTenGiay</td>
-                                <td>
-                                    <img src="~/Images/@item.sAnhBia" class="img-thumbnail" style="width:100px;">
-                                </td>
-                                @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { iMaGiay = item.iMaGiay }))
-                                {
-                                    <td>
-                                        <input type="number" min="1" name="txtSoLuong" value="@item.iSoLuong"
-                                               class="form-control" style="width: 80px;" />
-                                    </td>
-                                    <td>@string.Format("{0:#,##0}", item.dDonGia) VNĐ</td>
-                                    <td>@string.Format("{0:#,##0}", item.dThanhTien) VNĐ</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="submit" class="btn btn-info btn-sm">
-                                                <i class="fas fa-sync-alt"></i> Cập nhật
-                                            </button>
-                                            @Html.ActionLink("Xóa", "XoaSPKhoiGioHang",
-                                                new { iMaGiay = item.iMaGiay },
-                                                new { @class = "btn btn-danger btn-sm ms-2" })
-                                        </div>
-                                    </td>
-                                }
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3" class="text-end">
-                                <strong>Tổng số lượng: @string.Format("{0:#,##0}", ViewBag.TongSoLuong)</strong>
-                            </td>
-                            <td colspan="4" class="text-end">
-                                <strong>Tổng tiền: @string.Format("{0:#,##0}", ViewBag.TongTien) VNĐ</strong>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
 
-            <div class="d-flex justify-content-between mt-4">
-                <a href="@Url.Action("XoaGioHang")" class="btn btn-outline-danger">
-                    <i class="fas fa-trash"></i> Xóa giỏ hàng
-                </a>
-                <a href="@Url.Action("DatHang")" class="btn btn-primary">
-                    <i class="fas fa-shopping-cart"></i> ĐẶT HÀNG
-                </a>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                @TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+        }
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+                @TempData["Success"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
+                    <h3 class="text-muted">Giỏ hàng trống</h3>
+                    <a href="@Url.Action("Index", "ShopGiay")" class="btn btn-primary mt-3">
+                        <i class="fas fa-shopping-bag me-2"></i>Tiếp tục mua sắm
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="mb-4">
+                    <h4 class="mb-3">Chọn mã khuyến mãi:</h4>
+                    <form method="post" action="@Url.Action("ApDungKhuyenMai", "GioHang")" class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" name="maKM" id="km50" value="KM50">
+                                <label class="form-check-label" for="km50">
+                                    <span class="badge bg-primary">-50%</span>
+                                    KM50 - Giảm 50% đơn hàng
+                                    <small class="text-muted d-block">HSD: 31/12/2024</small>
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" name="maKM" id="km10" value="KM10">
+                                <label class="form-check-label" for="km10">
+                                    <span class="badge bg-primary">-10%</span>
+                                    KM10 - Giảm 10% đơn hàng
+                                    <small class="text-muted d-block">HSD: 31/12/2024</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-tag me-2"></i>Áp dụng khuyến mãi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã Giày</th>
+                                <th>Tên Giày</th>
+                                <th>Hình Ảnh</th>
+                                <th>Số Lượng</th>
+                                <th>Đơn Giá</th>
+                                <th>Thành Tiền</th>
+                                <th>Giảm Giá</th>
+                                <th>Thành Tiền Sau Giảm</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.iMaGiay</td>
+                                    <td>@item.sTenGiay</td>
+                                    <td>
+                                        <img src="~/Images/@item.sAnhBia" class="img-thumbnail" style="width:100px;" alt="@item.sTenGiay">
+                                    </td>
+                                    @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { iMaGiay = item.iMaGiay }))
+                                    {
+                                        <td>
+                                            <input type="number" min="1" name="txtSoLuong" value="@item.iSoLuong"
+                                                   class="form-control" style="width: 80px;" />
+                                        </td>
+                                        <td>@string.Format("{0:#,##0}", item.dDonGia) VNĐ</td>
+                                        <td>@string.Format("{0:#,##0}", item.dThanhTien) VNĐ</td>
+                                        <td>@string.Format("{0:#,##0}", item.GiamGia) VNĐ</td>
+                                        <td>@string.Format("{0:#,##0}", item.ThanhTienSauGiam) VNĐ</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="submit" class="btn btn-info btn-sm">
+                                                    <i class="fas fa-sync-alt"></i> Cập nhật
+                                                </button>
+                                                @Html.ActionLink("Xóa", "XoaSPKhoiGioHang",
+                                                    new { iMaGiay = item.iMaGiay },
+                                                    new { @class = "btn btn-danger btn-sm ms-2" })
+                                            </div>
+                                        </td>
+                                    }
+
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot class="table-light">
+                            <tr>
+                                <td colspan="5" class="text-end">
+                                    <strong>Tổng tiền:</strong>
+                                </td>
+                                <td>@string.Format("{0:#,##0}", ViewBag.TongTien) VNĐ</td>
+                                <td colspan="2">
+                                    <strong>Tổng giảm giá:</strong>
+                                </td>
+                                <td>@string.Format("-{0:#,##0}", ViewBag.TongGiamGia) VNĐ</td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" class="text-end">
+                                    <strong>Tổng tiền sau giảm:</strong>
+                                </td>
+                                <td colspan="2" class="text-primary fw-bold fs-5">
+                                    @string.Format("{0:#,##0}", ViewBag.TongTienSauGiam) VNĐ
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="@Url.Action("XoaGioHang")" class="btn btn-outline-danger"
+                       onclick="return confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?')">
+                        <i class="fas fa-trash me-2"></i>Xóa giỏ hàng
+                    </a>
+                    <div>
+                        <a href="@Url.Action("Index", "User")" class="btn btn-outline-primary me-2">
+                            <i class="fas fa-arrow-left me-2"></i>Tiếp tục mua sắm
+                        </a>
+                        <a href="@Url.Action("DatHang")" class="btn btn-primary">
+                            <i class="fas fa-shopping-cart me-2"></i>Đặt hàng
+                        </a>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
 
+<script>
+    function updateQuantity(maGiay, soLuong) {
+        if (soLuong < 1) return;
+
+        $.ajax({
+            url: '@Url.Action("CapNhatGioHang")',
+            type: 'POST',
+            data: { iMaGiay: maGiay, txtSoLuong: soLuong },
+            success: function() {
+                location.reload();
+            },
+            error: function() {
+alert('Có lỗi xảy ra khi cập nhật số lượng. Vui lòng thử lại.');
+            }
+        });
+    }
+</script>
+
 <style>
-
     .table {
-        width: 100%; /* Đảm bảo bảng chiếm toàn bộ chiều rộng */
-        border-collapse: collapse; /* Tùy chọn này giúp loại bỏ khoảng cách giữa các ô */
+        width: 100%;
+        border-collapse: collapse;
     }
 
-    .table th {
-        background: linear-gradient(45deg, #007bff, #00c6ff);
-        color: white;
-        font-weight: 600;
-    }
+        .table th {
+            background: linear-gradient(45deg, #007bff, #00c6ff);
+            color: white;
+            font-weight: 600;
+            padding: 15px;
+            white-space: nowrap;
+        }
 
-    th, td {
-        padding: 10px; /* Tùy chỉnh khoảng cách trong ô */
-        text-align: left; /* Căn trái nội dung */
-    }
+        .table td {
+            padding: 12px;
+            vertical-align: middle;
+        }
 
-    .btn-group .btn {
+    .btn {
         transition: all 0.3s ease;
     }
 
-        .btn-group .btn:hover {
+        .btn:hover {
             transform: translateY(-2px);
         }
 
     .card {
         border-radius: 15px;
         overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
 
     .card-header {
         background: linear-gradient(45deg, #007bff, #00c6ff);
         padding: 1.5rem;
+        color: aliceblue;
+        text-align: center;
+    }
+
+    .alert {
+        margin: 15px;
+        border-radius: 8px;
+    }
+
+    .input-group {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .img-thumbnail {
+        border-radius: 8px;
+        transition: transform 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+        .img-thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+    .table-responsive {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .input-group .form-control:focus {
+        box-shadow: none;
+        border-color: #007bff;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+
+    .table-light {
+        background-color: #f8f9fa;
+    }
+
+    .fs-5 {
+        font-size: 1.25rem;
+    }
+
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-check {
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+        .form-check:hover {
+            background-color: #f8f9fa;
+            border-color: #007bff;
+        }
+
+    .form-check-input:checked ~ .form-check-label {
+        color: #007bff;
+    }
+
+    .badge {
+        padding: 0.5em 1em;
+        margin-right: 0.5rem;
     }
 </style>
+
+

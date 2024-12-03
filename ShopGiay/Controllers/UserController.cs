@@ -212,7 +212,7 @@ namespace ShopGiay.Controllers
                 }
                 else if(ql != null)
                 {
-                    Session["HoTen"] = ql.HoTen;
+                    Session["MaQL"] = ql.MaQL;
                     return RedirectToAction("Admin", "Admin");
                 }
                 else

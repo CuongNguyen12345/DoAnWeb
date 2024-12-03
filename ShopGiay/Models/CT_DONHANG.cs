@@ -19,6 +19,7 @@ namespace ShopGiay.Models
         public decimal GiaLucBan { get; set; }
         public int SoLuong { get; set; }
         public Nullable<decimal> ThanhTien { get; set; }
+        public Nullable<decimal> DonGia { get; set; }
     
         public virtual DONHANG DONHANG { get; set; }
         public virtual SANPHAM SANPHAM { get; set; }

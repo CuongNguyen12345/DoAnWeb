@@ -9,25 +9,30 @@ namespace ShopGiay.Models
     {
         ShopGiayEntities db = new ShopGiayEntities();
         // Thuộc tính giỏ hàng giày
-        public int iMaGiay { get; set; } // Mã giày
-        public string sTenGiay { get; set; } // Tên giày
-        public string sAnhBia { get; set; } // Hình ảnh giày
-        public double dDonGia { get; set; } // Đơn giá giày
-        public int iSoLuong { get; set; } // Số lượng
-        public double dThanhTien { get { return iSoLuong * dDonGia; } } // Thành tiền
+        public int iMaGiay { get; set; }
+        public string sTenGiay { get; set; }
+        public string sAnhBia { get; set; }
+        public double dDonGia { get; set; }
+        public int iSoLuong { get; set; }
+        public double dThanhTien
+        {
+            get { return iSoLuong * dDonGia; }
+        }
+        public double GiamGia { get; set; }
+        public double ThanhTienSauGiam
+        {
+            get { return Math.Max(0, dThanhTien - GiamGia); }
+        }
 
-        //Thêm size giày, thương hiệu
-
-
-        // Hàm khởi tạo
         public GioHang(int idGiay)
         {
             iMaGiay = idGiay;
-            SANPHAM giay = db.SANPHAMs.Single(n => n.MaGiay == iMaGiay); // Lấy thông tin giày từ database
-            sTenGiay = giay.TenGiay; // Lấy tên giày
-            sAnhBia = giay.AnhBia; // Lấy đường dẫn hình ảnh
-            dDonGia = double.Parse(giay.GiaBan.ToString()); // Lấy giá bán
-            iSoLuong = 1; // Khởi tạo số lượng mặc định là 1
+            SANPHAM giay = db.SANPHAMs.Single(n => n.MaGiay == iMaGiay);
+            sTenGiay = giay.TenGiay;
+            sAnhBia = giay.AnhBia;
+            dDonGia = double.Parse(giay.GiaBan.ToString());
+            iSoLuong = 1;
+            GiamGia = 0;
         }
     }
 }

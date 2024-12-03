@@ -265,9 +265,71 @@ namespace ShopGiay.Controllers
             return View();
         }
 
-        public ActionResult ChiTietDonHang()
+        public ActionResult ChiTietDonHang() //Làm tiếp
         {
             return View();
+        }
+
+        public ActionResult CSKH()
+        {
+            if (Session["MaQL"] == null)
+            {
+                return RedirectToAction("DangNhap", "User");
+            }
+
+            var conversations = db.TINNHANs
+                                  .OrderByDescending(o => o.MaTinNhan)
+                                  .ToList();
+
+            return View(conversations);
+        }
+
+        public ActionResult ChatDetail(int maKH)
+        {
+            var khachHang = db.KHACHHANGs.Find(maKH);
+            var messages = db.TINNHANs
+                .Where(t => t.MaKH == maKH)
+                .OrderByDescending(t => t.ThoiGianGui)
+                .ToList();
+
+            // Đánh dấu tin nhắn đã đọc
+            var unreadMessages = messages.Where(m => !m.DaDoc && m.MaQL == null);
+            foreach (var message in unreadMessages)
+            {
+                message.DaDoc = true;
+            }
+            db.SaveChanges();
+
+            ViewBag.KhachHang = khachHang;
+            return View(messages);
+        }
+
+        [HttpPost]
+        public ActionResult TraLoiTinNhan(int maKH, string noiDung)
+        {
+            int MaQL = (int)Session["MaQL"];
+            try
+            {
+                var quanLy = db.QUANLies.FirstOrDefault(q => q.MaQL == MaQL);
+
+                var tinNhan = new TINNHAN
+                {
+                    MaKH = maKH,
+                    MaQL = quanLy.MaQL,
+                    NoiDung = noiDung,
+                    ThoiGianGui = DateTime.Now,
+                    DaDoc = true
+                };
+
+                db.TINNHANs.Add(tinNhan);
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
     }
 }

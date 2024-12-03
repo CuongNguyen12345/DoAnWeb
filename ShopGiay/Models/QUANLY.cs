@@ -18,6 +18,7 @@ namespace ShopGiay.Models
         public QUANLY()
         {
             this.PHANQUYENs = new HashSet<PHANQUYEN>();
+            this.TINNHANs = new HashSet<TINNHAN>();
         }
     
         public int MaQL { get; set; }
@@ -31,5 +32,7 @@ namespace ShopGiay.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHANQUYEN> PHANQUYENs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TINNHAN> TINNHANs { get; set; }
     }
 }

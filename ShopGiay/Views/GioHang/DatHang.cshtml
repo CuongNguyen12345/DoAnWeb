@@ -6,51 +6,78 @@
 }
 
 <div class="container py-5">
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row g-4">
+        <!-- Thông tin đơn hàng -->
+        <div class="col-lg-8">
             <div class="card shadow-lg border-0 mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">THÔNG TIN ĐƠN HÀNG</h3>
+                <div class="card-header bg-gradient-primary text-white py-3">
+                    <h3 class="mb-0 fw-bold">THÔNG TIN ĐƠN HÀNG</h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
-                            <thead class="table-light">
+                        <table class="table align-middle">
+                            <thead>
                                 <tr>
-                                    <th>Tên Giày</th>
-                                    <th>Hình Ảnh</th>
-                                    <th>Số Lượng</th>
-                                    <th>Đơn Giá</th>
-                                    <th>Thành Tiền</th>
+                                    <th scope="col" style="width: 40%">Sản phẩm</th>
+                                    <th scope="col" class="text-center" style="width: 15%">Số lượng</th>
+                                    <th scope="col" class="text-end" style="width: 20%">Đơn giá</th>
+                                    <th scope="col" class="text-end" style="width: 25%">Thành tiền</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@item.sTenGiay</td>
                                         <td>
-                                            <img src="~/Images/@item.sAnhBia" class="img-thumbnail" style="width:80px;">
+                                            <div class="d-flex align-items-center">
+                                                <img src="~/Images/@item.sAnhBia" class="img-thumbnail me-3"
+                                                     style="width:60px; height:60px; object-fit:cover;">
+                                                <div>
+                                                    <h6 class="mb-0">@item.sTenGiay</h6>
+                                                    <small class="text-muted">Mã: @item.iMaGiay</small>
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td>@item.iSoLuong</td>
-                                        <td>@string.Format("{0:#,##0}", item.dDonGia) VNĐ</td>
-                                        <td>@string.Format("{0:#,##0}", item.dThanhTien) VNĐ</td>
+                                        <td class="text-center">@item.iSoLuong</td>
+                                        <td class="text-end">@string.Format("{0:#,##0}", item.dDonGia) ₫</td>
+                                        <td class="text-end">
+                                            @if (item.GiamGia > 0)
+                                            {
+                                                <div class="text-decoration-line-through text-muted">
+                                                    @string.Format("{0:#,##0}", item.dThanhTien) ₫
+                                                </div>
+                                                <div class="text-danger fw-bold">
+                                                    @string.Format("{0:#,##0}", item.ThanhTienSauGiam) ₫
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="fw-bold">
+                                                    @string.Format("{0:#,##0}", item.dThanhTien) ₫
+                                                </div>
+                                            }
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
-                            <tfoot>
+                            <tfoot class="table-light">
                                 <tr>
-                                    <td colspan="2" class="text-end">
-                                        <strong>Tổng số lượng:</strong>
-                                    </td>
-                                    <td>
-                                        <strong>@string.Format("{0:#,##0}", ViewBag.TongSoLuong)</strong>
-                                    </td>
-                                    <td class="text-end">
-                                        <strong>Tổng tiền:</strong>
-                                    </td>
-                                    <td>
-                                        <strong>@string.Format("{0:#,##0}", ViewBag.TongTien) VNĐ</strong>
+                                    <td colspan="3" class="text-end">Tổng tiền:</td>
+                                    <td class="text-end">@string.Format("{0:#,##0}", ViewBag.TongTien) ₫</td>
+                                </tr>
+                                @if (ViewBag.TongGiamGia > 0)
+                                {
+                                    <tr>
+                                        <td colspan="3" class="text-end">Giảm giá:</td>
+                                        <td class="text-end text-danger">
+                                            -@string.Format("{0:#,##0}", ViewBag.TongGiamGia) ₫
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="3" class="text-end fw-bold">Tổng thanh toán:</td>
+                                    <td class="text-end text-primary fw-bold fs-5">
+                                        @string.Format("{0:#,##0}", ViewBag.TongTienSauGiam) ₫
                                     </td>
                                 </tr>
                             </tfoot>
@@ -60,59 +87,78 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-lg border-0">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">THÔNG TIN ĐẶT HÀNG</h3>
+        <!-- Thông tin thanh toán -->
+        <div class="col-lg-4">
+            <div class="card shadow-lg border-0 position-sticky" style="top: 2rem;">
+                <div class="card-header bg-gradient-primary text-white py-3">
+                    <h3 class="mb-0 fw-bold">THÔNG TIN THANH TOÁN</h3>
                 </div>
                 <div class="card-body">
                     @using (Html.BeginForm())
                     {
-                        <div class="mb-3">
-                            <label class="form-label">Họ tên:</label>
-                            <input type="text" class="form-control" value="@kh.HoTen" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Địa chỉ:</label>
-                            <input type="text" class="form-control" value="@kh.DiaChiKH" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Điện thoại:</label>
-                            <input type="text" class="form-control" value="@kh.DienThoaiKH" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Ngày đặt:</label>
-                            <input type="text" class="form-control" value="@DateTime.Now.ToShortDateString()" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Ngày giao:</label>
-                            <input type="date" name="NgayGiao" class="form-control" required>
+                        <div class="customer-info mb-4">
+                            <h5 class="card-title mb-3">Thông tin người nhận</h5>
+                            <div class="mb-3">
+                                <label class="form-label">Họ tên</label>
+                                <input type="text" class="form-control bg-light" value="@kh.HoTen" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control bg-light" value="@kh.DiaChiKH" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control bg-light" value="@kh.DienThoaiKH" readonly>
+                            </div>
                         </div>
 
-                        <div class="mb-4">
-                            <label class="form-label">Phương thức thanh toán:</label>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="radio" name="thanhtoan"
-                                       value="nhanhang" checked id="cod">
-                                <label class="form-check-label" for="cod">
-                                    Thanh toán khi nhận hàng
+                        <div class="delivery-info mb-4">
+                            <h5 class="card-title mb-3">Thông tin giao hàng</h5>
+                            <div class="mb-3">
+                                <label class="form-label">Ngày đặt hàng</label>
+                                <input type="text" class="form-control bg-light" value="@DateTime.Now.ToString("dd/MM/yyyy")" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ngày giao hàng</label>
+                                <input type="date" name="NgayGiao" class="form-control" required
+                                       min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+
+                        <div class="payment-methods mb-4">
+                            <h5 class="card-title mb-3">Phương thức thanh toán</h5>
+                            <div class="payment-option mb-3">
+                                <input type="radio" class="btn-check" name="thanhtoan" value="nhanhang"
+                                       id="cod" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary w-100 d-flex align-items-center gap-2" for="cod">
+                                    <i class="fas fa-money-bill-wave fs-5"></i>
+                                    <span>Thanh toán khi nhận hàng</span>
                                 </label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="thanhtoan"
-                                       value="vnpay" id="vnpay">
-                                <label class="form-check-label" for="vnpay">
-                                    Thanh toán qua VNPay
+                            <div class="payment-option mb-3">
+                                <input type="radio" class="btn-check" name="thanhtoan" value="bidv"
+                                       id="bidv" autocomplete="off">
+                                <label class="btn btn-outline-primary w-100 d-flex align-items-center gap-2" for="bidv">
+                                    <i class="fas fa-university fs-5"></i>
+                                    <span>Thanh toán qua BIDV</span>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" class="btn-check" name="thanhtoan" value="vnpay"
+                                       id="vnpay" autocomplete="off">
+                                <label class="btn btn-outline-primary w-100 d-flex align-items-center gap-2" for="vnpay">
+                                    <i class="fas fa-credit-card fs-5"></i>
+                                    <span>Thanh toán qua VNPay</span>
                                 </label>
                             </div>
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-check-circle"></i> XÁC NHẬN ĐẶT HÀNG
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-check-circle me-2"></i>XÁC NHẬN ĐẶT HÀNG
                             </button>
                             <a href="@Url.Action("GioHang")" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left"></i> QUAY LẠI GIỎ HÀNG
+                                <i class="fas fa-arrow-left me-2"></i>QUAY LẠI GIỎ HÀNG
                             </a>
                         </div>
                     }
@@ -123,37 +169,110 @@
 </div>
 
 <style>
+    .bg-gradient-primary {
+        background: linear-gradient(45deg, #2937f0, #9f1ae2);
+    }
+
     .card {
-        border-radius: 15px;
+        border-radius: 12px;
         overflow: hidden;
     }
 
-    .card-header {
-        background: linear-gradient(45deg, #007bff, #00c6ff);
-        padding: 1.5rem;
+    .table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .table td {
+        vertical-align: middle;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .table tfoot td {
+        border-top: 2px solid #dee2e6;
+    }
+
+    .payment-option label.btn {
+        text-align: left;
+        padding: 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .payment-option .btn-check:checked + label {
+        background-color: #2937f0;
+        color: white;
+        border-color: #2937f0;
+    }
+
+    .form-control:focus {
+        border-color: #2937f0;
+        box-shadow: 0 0 0 0.25rem rgba(41, 55, 240, 0.25);
     }
 
     .btn {
+        font-weight: 500;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
         transition: all 0.3s ease;
     }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    .img-thumbnail {
+        padding: 0.25rem;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
     }
 
-    .form-check-input:checked {
-        background-color: #007bff;
-        border-color: #007bff;
+    .card-header {
+        color: aliceblue;
+        text-align: center;
     }
 
-    .table {
-        width: 100%; /* Đảm bảo bảng chiếm toàn bộ chiều rộng */
-        border-collapse: collapse; /* Tùy chọn này giúp loại bỏ khoảng cách giữa các ô */
+    .img-thumbnail {
+        border-radius: 8px;
+        transition: transform 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+        .img-thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+    .card-title {
+        color: #2937f0;
+        font-weight: 600;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .bg-light {
+        background-color: #f8f9fa !important;
+    }
+
+    .position-sticky {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .text-primary {
+        color: #2937f0 !important;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+    }
+
+    .customer-info, .delivery-info, .payment-methods {
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
     }
 </style>

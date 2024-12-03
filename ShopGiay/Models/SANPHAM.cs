@@ -17,8 +17,8 @@ namespace ShopGiay.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SANPHAM()
         {
-            this.CT_DONHANG = new HashSet<CT_DONHANG>();
             this.BINHLUANs = new HashSet<BINHLUAN>();
+            this.CT_DONHANG = new HashSet<CT_DONHANG>();
         }
     
         public int MaGiay { get; set; }
@@ -35,11 +35,11 @@ namespace ShopGiay.Models
         public int SoLuongTon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BINHLUAN> BINHLUANs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_DONHANG> CT_DONHANG { get; set; }
         public virtual LOAIGIAY LOAIGIAY { get; set; }
         public virtual NHACUNGCAP NHACUNGCAP { get; set; }
         public virtual THUONGHIEU THUONGHIEU { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BINHLUAN> BINHLUANs { get; set; }
     }
 }

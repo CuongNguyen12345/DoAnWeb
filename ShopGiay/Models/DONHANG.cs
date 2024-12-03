@@ -26,6 +26,7 @@ namespace ShopGiay.Models
         public Nullable<System.DateTime> NgayGiao { get; set; }
         public Nullable<decimal> TongTien { get; set; }
         public Nullable<int> MaKH { get; set; }
+        public Nullable<int> DaThanhToan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_DONHANG> CT_DONHANG { get; set; }
